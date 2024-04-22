@@ -1,0 +1,141 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.34);
+}
+.modalContainer{
+    position: relative;
+    z-index: 11;
+    width: 40%;
+    height: 90%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.title{
+    height: 10%;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 8px 8px 0px 0px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.02em;
+    color: #000000;
+}
+
+.inputContainer{
+    margin: 0 5%;
+    margin-top: 30px;
+    height: 75%;
+}
+
+.formBtnContainer{
+    height: 10%;
+    margin: 0 5%;
+}
+.inputItemList{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    align-items: flex-end;
+}
+.bossTitle{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 41px;
+    letter-spacing: -0.02em;
+    color: #000000;
+}
+.bossContainer{
+    width: 45%;
+    margin-top: 20px;
+}
+
+.commonTitle{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #555555;
+}
+
+.commonInput{
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    border-radius: 8px;
+    padding-left: 10px;
+    margin-top: 8px;
+}
+
+
+.more{
+width: 100%;
+height: 40px;
+background: #EEEEEE;
+border-radius: 8px;
+padding: 0 5px;
+cursor: pointer;
+
+/* font-family: 'Font Awesome 6 Free'; */
+font-style: normal;
+font-weight: 900;
+font-size: 28px;
+line-height: 28px;
+/* identical to box height */
+display: flex;
+align-items: center;
+justify-content: center;
+letter-spacing: -0.02em;
+
+color: #C0C0C0;
+
+
+}
+
+
+.formBtn{
+    /* 신청버튼 */
+
+width: 100%;
+height: 50px;
+
+border: none;
+
+/* Rectangle 19 */
+
+background: #5467F5;
+border-radius: 8px;
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 35px;
+text-align: center;
+letter-spacing: -0.02em;
+
+color: #FFFFFF;
+
+
+}

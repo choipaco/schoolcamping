@@ -1,0 +1,50 @@
+.main{
+    width: 80%;
+    height: 80%;
+    padding: 10%;
+    cursor: pointer;
+}
+
+.container{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.state{
+width: 20px;
+height: 20px;
+border-radius: 4px;
+
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 26px;
+color: #FFFFFF;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+
+.complite{
+    background-color: #F55454;
+}
+
+.incomplete{
+    background-color: #0AA610;
+}
+.imposible{
+    background-color: #C0C0C0;
+}
+.font{
+    margin-left: 10px;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 26px;
+color: #808080;
+
+
+}
