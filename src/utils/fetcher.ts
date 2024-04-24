@@ -1,8 +1,7 @@
-const fetcher = async <T>(...args: Parameters<typeof fetch>): Promise<T> => {
-    const response = await fetch(...args);
-    const data = await response.json();
-    return data as T;
-  };
+import axios from "axios";
+import axiosInstance from "./axiosInstance";
+
+const fetcher = (url: string) => axiosInstance.get(url).then(res => res.data);
   
-  export default fetcher;
+export default fetcher;
   

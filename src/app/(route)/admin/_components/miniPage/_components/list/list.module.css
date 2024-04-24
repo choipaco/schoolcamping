@@ -1,0 +1,23 @@
+.main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+}
+.tables{
+    border: none;
+    margin-top: 50px;
+    width: 100%;
+}
+.head{
+    width: 100px;
+    border: none;
+    border-bottom: 1px solid black;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 23px;
+    color: #808080;
+    padding-bottom: 10px;
+}
+

@@ -32,6 +32,8 @@ export const AlertProvider: React.FC<{children: ReactNode}> = ({ children }) => 
   const addAlert = useCallback((message: string, isagree: boolean) => {
     const id = nextId++;
     setAlerts(alerts => [...alerts, { id, message, isagree }]);
+    setTimeout(()=>removeAlert(id), 3000);
+    
   }, []);
 
   const removeAlert = useCallback((id: number) => {

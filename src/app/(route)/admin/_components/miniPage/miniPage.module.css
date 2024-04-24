@@ -1,0 +1,17 @@
+.main{
+    position: fixed;
+    top: 0;
+    left: 60%;
+    width: 40%;
+    height: 100vh;  
+    background: #FFFFFF;
+    border-left: 1px solid #C0C0C0;
+    box-shadow: -1px 4px 14px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.container{
+    width: 90%;
+    margin: 0 5%;
+    margin-top: 5%;
+}

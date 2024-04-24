@@ -1,0 +1,12 @@
+.body{
+    height: 80px;
+    border: none;
+    border-bottom: 1px solid #C0C0C0;
+    text-align: center;
+}
+
+.selectStu{
+    padding: 5%;
+    border: 1px solid #C0C0C0;
+    outline: none;
+}

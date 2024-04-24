@@ -5,6 +5,9 @@ import { AlertProvider } from "./_contexts/AlertContext";
 export const metadata: Metadata = {
   title: "school camping",
   description: "cloud & easy backend project build",
+  icons: {
+    icon: "/assets/img/gbsw.ico"
+  }
 };
 
 export default function RootLayout({

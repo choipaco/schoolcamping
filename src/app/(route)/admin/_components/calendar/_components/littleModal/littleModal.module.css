@@ -1,0 +1,41 @@
+.main{
+    box-sizing: border-box;
+    width: 120px;
+    height: 100px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 1px 4px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 16px 16px 16px;
+    position: fixed;
+    margin-left: 50px;
+}
+
+
+.container{
+    margin: 10%;
+    width: 80%;
+    height: 80%;
+    
+}
+
+.iconConatiner{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.insertContainer{
+    width: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.insert{
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+    color: #808080;
+}
