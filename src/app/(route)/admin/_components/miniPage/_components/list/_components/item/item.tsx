@@ -34,7 +34,7 @@ export default function Item(props:{data:Data}){
                     {
                         props.data.info?.reservationStudents.map((it)=>{
                             return(
-                                <option className={styles.option}>{it.studentId}{it.studentName}</option>
+                                <option key={it.id} className={styles.option}>{it.studentId}{it.studentName}</option>
                             )
                         })
                     }
