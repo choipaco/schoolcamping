@@ -23,3 +23,26 @@ export const getBlackList = async() =>{
         alert(error.response.data.message);
     }
 }
+
+
+export async function updateCalendarAdmin(data:any) {
+
+    try {
+        await axiosInstance.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/update`, {
+            id: data.id,
+            leader: data.leader,
+            reservationDate: data.reservationDate,
+            students: data.students,
+            teacherName: data.teacherName
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return true;
+    } catch (error:any) {
+        return false;
+    }
+    
+}

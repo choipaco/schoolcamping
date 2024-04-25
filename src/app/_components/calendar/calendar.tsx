@@ -8,6 +8,8 @@ import PasswordModal from './_components/passwordModal/passwordModal';
 import { createClassroomData } from '@/utils/form';
 import { submitCalendar } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type pass = "create" | 'auth';
 
@@ -25,7 +27,7 @@ export default function Calendar(){
     day.setMonth(day.getMonth() + 2);
 
     const submitCalendarInput = async() =>{
-        const submits = await submitCalendar(createClassroomData(submit.boss,submit.inputs,submit.teacher,data.date,password))
+        const submits = await submitCalendar(createClassroomData(submit.boss,submit.inputs,submit.teacher,data.date,0,password))
         if(submits){
             addAlert("예약이 완료되었습니다.", true);
             setReload(true);
@@ -71,7 +73,29 @@ export default function Calendar(){
         <div className={styles.main}>
             <div className={styles.calendarContainer}>
                 <div className={styles.calendarMonth}>
-                    {getNextMonthYear()}
+                    <div className={styles.month}>
+                        {getNextMonthYear()}
+                        <Image
+                        className={styles.sonamu}
+                        src="/assets/img/sonamu.svg"
+                        alt=""
+                        width={75}
+                        height={70}
+                        />
+                    </div>
+                    <div
+                    className={styles.adminBtn}
+                    >
+                        <Link href={'#'} className={styles.adminBtn}>
+                            <label className={styles.adminTitle}>관리자</label>
+                            <Image
+                            src="/assets/img/human.svg"
+                            alt=""
+                            width={16}
+                            height={19}
+                            />
+                        </Link>
+                    </div>
                 </div>
                 <div className={styles.calendarItem}>
                     <CalendarList date={day} setData={setData} reload={reload} setReload={setReload}/>

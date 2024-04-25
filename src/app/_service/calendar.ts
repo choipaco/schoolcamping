@@ -39,6 +39,8 @@ export async function submitCalendar(data:any) {
 
 export async function validateStudent(leaderInput:string, studentsInput: { value: string }[],reservationDate: string) {
     const data = validate(leaderInput,studentsInput,reservationDate)
+
+    if(!data) return false;
     try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping/validate/student`, {
             studentsInfo: data.studentsInfo,
@@ -49,7 +51,7 @@ export async function validateStudent(leaderInput:string, studentsInput: { value
             }   
         });
 
-        return res.data;
+        return res.status;
     } catch (error:any) {
         return false;
     }

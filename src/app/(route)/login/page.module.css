@@ -1,68 +1,71 @@
-.loginContainer{
-    width: 400px;
-    height: 500px;
-    margin: 0 auto;
-    position: relative;
-    top: 100px;
-}
-.loginTitle{
-    text-align: center;
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 81px;
-
-}
-
-.loginTitleColor1{
-    font-family: 'Outfit';
-    color: #0075FF; 
-    font-weight: 700;
-}
-
-.loginTitleColor2{
-    color: #4F7BED;
-    font-weight: 500;
-}
-
-.loginDep{
-    text-align: center;
-    font-family: 'Outfit';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: #2D2D2D;
-
-}
-
-.loginFormContainer{
+.main{
     display: flex;
-    width: 330px;
-    margin: 0 auto;
-    margin-top: 20px;
-    flex-wrap: wrap;
     justify-content: center;
-    
+    align-items: center;
 }
 
-.findIDContainer{
-    width: 320px;
-    margin-top: 10px;
-    text-align: right;
+.container{
+width: 500px;
+height: 230px;
+
+background: #FFFFFF;
+border: 1px solid #C0C0C0;
+box-shadow: 1px 4px 14px rgba(0, 0, 0, 0.15);
+border-radius: 8px;
+
 }
 
-.findID{
-font-family: 'Outfit';
+.margin{
+    margin: 8%;
+}
+
+
+.title{
 font-style: normal;
-font-weight: 500;
-font-size: 15px;
-line-height: 19px;
-/* identical to box height */
-text-align: right;
+font-weight: 700;
+font-size: 32px;
+line-height: 46px;
+display: flex;
+align-items: center;
+letter-spacing: -0.02em;
 
-color: #0075FF;
+color: #5467F5;
 
 
+}
+
+.passwordContainer{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.input{
+    width: 300px;
+    height: 60px;
+    background: #FFFFFF;
+    border: 1px solid #C0C0C0;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 0 5%;
+}
+
+.btn{
+    width: 75px;
+    height: 60px;
+    filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
+    background: #5467F5;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.02em;
+
+    color: #FFFFFF;
 }

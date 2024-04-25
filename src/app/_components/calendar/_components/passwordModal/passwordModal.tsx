@@ -49,6 +49,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
                     setInputValues(["", "", "", ""])
                     setPassword("")
                     setPasswordWrong(false)
+                    setTitle("비밀번호 입력")
                     props.setModal(false);
                 }else{
                     setPasswordWrong(true);

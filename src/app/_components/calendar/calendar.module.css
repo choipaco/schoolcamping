@@ -10,7 +10,14 @@
 }
 
 .calendarContainer{
-    margin: 0 13%;
+    margin: 0 8%;
+    background-color: #ffffff;
+    padding: 0 50px;
+    padding-bottom: 20px;
+    border: 1px solid #CCCCCC;
+    box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+
 }
 
 .calendarMonth{
@@ -22,9 +29,45 @@
     color: #000000;
     border-bottom: 1px solid #000000;
     padding-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.sonamu{
+    position: relative;
+    top: 20px;
+    margin-left: 20px;
 }
 
+.adminBtn{
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #808080;
+    margin-bottom: 10px;
+
+}
 .calendarItem{
     width: 100%;
     margin-top: 20px;
+}
+
+
+.adminTitle{
+    display: flex;
+    align-items: flex-end;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .calendarContainer{
+        margin-top: 50px;
+    }
+    
 }

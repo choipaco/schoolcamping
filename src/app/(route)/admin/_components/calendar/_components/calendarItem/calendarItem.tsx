@@ -4,10 +4,28 @@ import { useAlert } from '@/app/_contexts/AlertContext';
 import Little from '../littleModal/littleModal';
 
 interface Day{
-    date?: string;
+    date?: string
     status?: string
+    info?: info | null
 }
-export default function CalendarItem(props:{day:Day,month:number, year:number, setData:Dispatch<SetStateAction<any>>}){
+type miniChoice = 'update' | 'delete' | 'none';
+
+interface info{
+    id: number,
+    leaderName: string,
+    leaderId: string,
+    teacherName: string,
+    reservationDate: string,
+    reservationStudents:reservationStudents[]
+}
+
+interface reservationStudents{
+    id: number,
+    studentName: string,
+    studentId: string
+}
+
+export default function CalendarItem(props:{day:Day,month:number, year:number, setData:Dispatch<SetStateAction<any>>, setMiniChoice:Dispatch<SetStateAction<miniChoice>>}){
     const { addAlert } = useAlert();
     const [modal,setModal] = useState(false);
     const handleOnClick = () => {
@@ -63,7 +81,7 @@ export default function CalendarItem(props:{day:Day,month:number, year:number, s
             </div>
             {
                 props.day.status === "예약 완료" ?
-                <Little modal={modal} setModal={setModal} day={props.day.date} month={props.month} year={props.year}/>
+                <Little modal={modal} setModal={setModal} day={props.day.date} month={props.month} year={props.year} setMiniChoice={props.setMiniChoice}/>
                 :
                 ""
             }

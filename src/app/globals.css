@@ -27,6 +27,7 @@ button, textarea, input{
 main{
     width: 100vw;
     height: 100vh;
+    background-color: #F7F7F9;
 }
 
 input::placeholder, textarea::placeholder{
@@ -53,7 +54,6 @@ p{
 ::-webkit-scrollbar-thumb{
 width: 8px;
 height: auto;
-
 background: #D9D9D9;
 border-radius: 32px;
 

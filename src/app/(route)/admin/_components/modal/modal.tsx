@@ -4,14 +4,24 @@ import styles from './modal.module.css'
 import { getNextMonthDateFormatted } from '@/utils/time';
 import { validateStudent } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
+import Image from 'next/image';
+import { updateCalendarAdmin } from '@/app/_service/admin';
+import { createClassroomData } from '@/utils/form';
 
-export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAction<boolean>>, data:any, setSubmit:Dispatch<SetStateAction<any>>, setData:Dispatch<SetStateAction<any>>}) {
+type miniChoice = 'update' | 'delete' | 'none';
+export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>, data:any, setData:Dispatch<SetStateAction<any>>, miniChoice:miniChoice, setMiniChoice:Dispatch<SetStateAction<miniChoice>>}) {
     const { addAlert } = useAlert();
-    const [boss,setBoss] = useState('');
-    const [teacher,setTeacher] = useState('');
+    const [boss,setBoss] = useState(props.data.info.leaderId + props.data.info.leaderName);
+    const [teacher,setTeacher] = useState(props.data.info.teacherName);
     const [inputs, setInputs] = useState([{ value: '' }]);
     const [day,setDay] = useState<any>();
-    
+    useEffect(()=>{
+        setInputs(props.data.info.reservationStudents.map((it:any)=>{
+            return(
+                { value: it.studentId + it.studentName }
+            )
+        }))
+    },[])
     useEffect(()=>{
         if(props.data) {
             setDay(getNextMonthDateFormatted(props.data.date));
@@ -31,6 +41,10 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
       }
     };
 
+    const handleRemoveInput = (indexToRemove:any) => {
+        setInputs(inputs.filter((_, index) => index !== indexToRemove));
+    };
+
     const handleInputChange = (index:number, event:ChangeEvent<HTMLInputElement>) => {
       const newInputs = inputs.slice();
       newInputs[index].value = event.target.value;
@@ -38,7 +52,7 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
     };  
 
     const handleOnClickBackground = () => {
-        props.setModal(false);
+        props.setMiniChoice('none');
         setBoss('')
         setTeacher('')
         setInputs([{ value: '' }])
@@ -50,43 +64,29 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
         if(!boss) return addAlert("대표자를 입력해주세요",false);
         if(!teacher) return addAlert("선생님 성함을 입력해주세요",false);
         if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
-            
-            const res = await validateStudent(boss,inputs,props.data.date);
-            console.log(res)
-            if(!res) return addAlert("학번을 정확히 써주세요", false);
-            if(res !== 200){
-                addAlert("참가 불가능한 학생이 있습니다",false);
-                props.setModal(false);
-                setBoss('')
-                setTeacher('')
-                setInputs([{ value: '' }])
-                setDay('')
-                props.setData("");
-                return;
-            }
-         props.setSubmit({
-            boss,
-            teacher,
-            inputs
-         })
 
-        props.setModal(false);
-        setBoss('')
-        setTeacher('')
-        setInputs([{ value: '' }])
-        setDay('')
+        const res = await updateCalendarAdmin(createClassroomData(boss,inputs,teacher,props.data.date,props.data.info.id));
+        if(res){
+            addAlert("수정완료",true);
+            props.setReload(true);
+            props.setMiniChoice('none');
+            setBoss('')
+            setTeacher('')
+            setInputs([{ value: '' }])
+            setDay('')
+        }else{
+            addAlert("수정에 실패했습니다",false);
+        }
     }
     return(
-        <div className={styles.main}
-        style={props.modal ? {display: "flex"} : {display: "none"}}
-        >
+        <div className={styles.main}>
             <div className={styles.background} onClick={handleOnClickBackground}/>
             <div className={styles.modalContainer}>
                 <div className={styles.title}>
                     {day}
                 </div>
                 <div className={styles.inputContainer}>
-                        <label className={styles.bossTitle}>참가자를 입력해주세요</label>
+                        <label className={styles.bossTitle}>참가자 수정하기</label>
                     <div className={styles.inputItemList}>
                     <div className={styles.bossContainer}>
                         <label className={styles.commonTitle}>대표자</label><br/>
@@ -121,14 +121,28 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
                                 :
                                 ""
                             }
-                        <input
-                            type="text"
-                            value={input.value}
-                            onChange={(event) => handleInputChange(index, event)}
-                            className={styles.commonInput}
-                            placeholder='학번이름'
-                        />
-                        </div>
+                            <div className={styles.listContainer}>
+                                <input
+                                    type="text"
+                                    value={input.value}
+                                    onChange={(event) => handleInputChange(index, event)}
+                                    className={styles.commonListInput}
+                                    placeholder='학번이름'
+                                    />
+                                    {inputs.length > 1 && (
+                                        <div 
+                                        className={styles.deleteBtn}
+                                        onClick={() => handleRemoveInput(index)}>
+                                            <Image
+                                            src="/assets/img/deleteMan.svg"
+                                            alt=""
+                                            width={20}
+                                            height={16}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         {index === inputs.length - 1 && inputs.length < 8 && (
                              <div className={styles.bossContainer}>
                                 <div className={styles.more} onClick={handleAddInput}>
@@ -145,7 +159,7 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
                     className={styles.formBtn}
                     onClick={handleOnClickSubmit}
                     >
-                        신청완료
+                        수정완료
                     </button>
                 </div>
             </div>

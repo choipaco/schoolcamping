@@ -14,18 +14,17 @@ interface date{
     year: number
     month: number
 }
-
-export default function Calendar(props:{nav:navbar, setNav:Dispatch<SetStateAction<navbar>>,date:date,setDate:Dispatch<SetStateAction<date>>}){
+type miniChoice = 'update' | 'delete' | 'none';
+export default function Calendar(props:{reload:boolean,setReload:Dispatch<SetStateAction<boolean>>,nav:navbar, setNav:Dispatch<SetStateAction<navbar>>,date:date,setDate:Dispatch<SetStateAction<date>>,miniChoice:miniChoice ,setMiniChoice:Dispatch<SetStateAction<miniChoice>>, setData:Dispatch<SetStateAction<any>>}){
     const { addAlert } = useAlert();
-    const [data, setData] = useState<any>()
-    const [reload,setReload] = useState(true);
     
     const day = new Date();
     day.setMonth(day.getMonth() + 2);
 
     useEffect(()=>{
-        setReload(true);
+        props.setReload(true);
     },[props.date])
+    
     return(
         <div className={styles.main}>
             <div className={styles.calendarContainer}>
@@ -33,9 +32,10 @@ export default function Calendar(props:{nav:navbar, setNav:Dispatch<SetStateActi
                     <ChoiceDate date={props.date} setDate={props.setDate} nav={props.nav} setNav={props.setNav}/>
                 </div>
                 <div className={styles.calendarItem}>
-                    <CalendarList date={props.date} setData={setData} reload={reload} setReload={setReload}/>
+                    <CalendarList date={props.date} setData={props.setData} reload={props.reload} setReload={props.setReload} miniChoice={props.miniChoice} setMiniChoice={props.setMiniChoice}/>
                 </div>
             </div>
+            
         </div>
     )
 }

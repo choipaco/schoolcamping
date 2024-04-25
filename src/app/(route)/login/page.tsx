@@ -1,44 +1,39 @@
 'use client'
 import styles from "./page.module.css";
 import { useState } from "react";
-import LoginInput from "./_components/loginInputs/loginInput";
-import LoginButton from "./_components/loginButton/loginButton";
-import EasyLogin from "./_components/easyLogin/easyLogin";
 import Link from "next/link";
 import loginApi from "@/app/_service/auth";
+import { useAlert } from "@/app/_contexts/AlertContext";
+import { useRouter } from "next/navigation";
+import { setCookie } from "@/utils/cookies";
 export default function Home() {
-  const [id, setId] = useState('');
+  const router = useRouter();
   const [pw, setPw] = useState('');
-  const [autoLogin, setAutoLogin] = useState(false);
+  const {addAlert} = useAlert();
   const onSubmit = async () => {
+    const status = await loginApi(pw);
 
-    await loginApi(id,pw,autoLogin);
-};
+    if(status){
+      addAlert('로그인 완료', true);  
+      setCookie('login',status,{path: '/'})
+      router.push('/admin');
+    }else{
+      addAlert('로그인 실패', false);
+    }
+  };
   return (
-    <main>
-        <div className={styles.loginContainer}>
-
-          <h1 className={styles.loginTitle}>
-            <label className={styles.loginTitleColor1}>Min</label>
-            <label className={styles.loginTitleColor2}>clod</label>
-          </h1>
-
-          <div className={styles.loginDep}>
-          Lorem ipsum dolor sit amet consectetur. Pharetra.
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.margin}>
+          <div className={styles.title}>
+          관리자 로그인
           </div>
-
-          <div className={styles.loginFormContainer}>
-            <LoginInput setId={setId} setPw={setPw} setAutoLogin={setAutoLogin}/>
-            <LoginButton onSubmit={onSubmit}/>
-            <EasyLogin/>
-            <div className={styles.findIDContainer}>
-            <Link 
-            href={"#"}
-            className={styles.findID}
-            >아이디 / 비밀번호 찾기</Link>
-            </div>
+          <div className={styles.passwordContainer}>
+            <input className={styles.input} type="password" value={pw} onChange={(e)=>{setPw(e.target.value)}}/>
+            <button className={styles.btn} onClick={onSubmit}>{`->`}</button>
           </div>
         </div>
+      </div>
     </main>
   );
 }

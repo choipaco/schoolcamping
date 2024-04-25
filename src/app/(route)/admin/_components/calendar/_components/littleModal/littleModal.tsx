@@ -2,7 +2,10 @@ import { formatDateAdmin } from '@/utils/time';
 import styles from './littleModal.module.css'
 import { useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
-export default function Little(props: {modal:boolean, setModal:Dispatch<SetStateAction<boolean>>, day:string | undefined, month:number, year:number}){
+
+type miniChoice = 'update' | 'delete' | 'none';
+
+export default function Little(props: {modal:boolean, setModal:Dispatch<SetStateAction<boolean>>, day:string | undefined, month:number, year:number, setMiniChoice:Dispatch<SetStateAction<miniChoice>>}){
     const divRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -22,6 +25,16 @@ export default function Little(props: {modal:boolean, setModal:Dispatch<SetState
       useEffect(()=>{
         console.log(props.day, props.month)
       },[props.day])
+
+      const handleClickUpdate = () => {
+        props.setMiniChoice('update');
+        props.setModal(false);
+      }
+
+      const handleClickDelete = () => {
+        props.setMiniChoice('delete');
+        props.setModal(false);
+      }
     return(
         <div className={styles.main}
         style={props.modal ? {display: "block"} : {display: "none"}}
@@ -30,7 +43,7 @@ export default function Little(props: {modal:boolean, setModal:Dispatch<SetState
           <div className={styles.container}>
             {formatDateAdmin(props.year,props.month,props.day)}
             <div className={styles.iconConatiner}>
-              <div className={styles.insertContainer}>
+              <div className={styles.insertContainer} onClick={handleClickUpdate}>
                 <Image
                 src="/assets/img/insert.svg"
                 alt="수정"
@@ -41,7 +54,7 @@ export default function Little(props: {modal:boolean, setModal:Dispatch<SetState
                   수정하기
                 </label>
               </div>
-              <div className={styles.insertContainer}>
+              <div className={styles.insertContainer} onClick={handleClickDelete}>
                 <Image
                 src="/assets/img/delete.svg"
                 alt="등록취소"
