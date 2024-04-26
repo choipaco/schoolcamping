@@ -15,7 +15,7 @@ interface Student {
   }
   
   // 문자열에서 숫자(학번)와 한글 이름을 분리하는 함수
-  function parseStudentInput(input: string): Student {
+  export function parseStudentInput(input: string): Student {
     const [, studentId, studentName] = input.match(/(\d+)([가-힣]+)/)!;
     return { studentId, studentName };
   }

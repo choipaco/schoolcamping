@@ -38,13 +38,13 @@ export default function CalendarList(props:{date:date, setData:Dispatch<SetState
 
     useEffect(() => {
         const fetchData = async () => {
-            if(props.reload){
+            if(props.date){
                 await getList();
                 props.setReload(false);
             }
         };
         fetchData();
-    }, [props.reload, props.setReload]);
+    }, [props.reload, props.setReload, props.date]);
 
 
 

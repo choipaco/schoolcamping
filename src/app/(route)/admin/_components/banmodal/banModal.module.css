@@ -1,0 +1,99 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.34);
+}
+.modalContainer{
+    position: relative;
+    z-index: 11;
+    width: 35%;
+    height: 70%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+.blackListContainer{
+    margin: 8%;
+}
+.title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 41px;
+    letter-spacing: -0.02em;
+
+    color: #000000;
+
+
+}
+
+.inputContainer{
+    margin-top: 30px;
+}
+
+.subTitle{
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 26px;
+letter-spacing: -0.02em;
+
+color: #555555;
+
+
+}
+
+
+.input{
+    width: 95%;
+    padding: 0 2.5%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    border: 1px solid #C0C0C0;
+    margin-top: 20px;
+}
+
+.textArea{
+    width: 95%;
+    height: 100px;
+    padding: 2% 2.5%;
+    border-radius: 12px;
+    border: none;
+    border: 1px solid #C0C0C0;
+    margin-top: 20px;
+    resize: none;
+}
+.submitBtnContainer{
+    margin-top: 10px;
+}
+.submitBtn{
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: #5467F5;
+    border-radius: 8px;
+    font-style: normal; 
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+
+
+
+}

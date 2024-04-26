@@ -83,19 +83,6 @@ export default function Calendar(){
                         height={70}
                         />
                     </div>
-                    <div
-                    className={styles.adminBtn}
-                    >
-                        <Link href={'#'} className={styles.adminBtn}>
-                            <label className={styles.adminTitle}>관리자</label>
-                            <Image
-                            src="/assets/img/human.svg"
-                            alt=""
-                            width={16}
-                            height={19}
-                            />
-                        </Link>
-                    </div>
                 </div>
                 <div className={styles.calendarItem}>
                     <CalendarList date={day} setData={setData} reload={reload} setReload={setReload}/>

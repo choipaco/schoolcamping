@@ -5,7 +5,7 @@ interface date{
     month: number
 }
 type navbar = 'list' | 'black';
-export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAction<date>>, nav:navbar, setNav:Dispatch<SetStateAction<navbar>>}){
+export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAction<date>>, nav:navbar, setNav:Dispatch<SetStateAction<navbar>>, setBanDate:Dispatch<SetStateAction<boolean>>}){
 
     const handleOnClickPrevDate = () => {
         let year = props.date.year;
@@ -49,7 +49,7 @@ export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAc
             <div className={styles.navbarContainer}>
                 <div className={styles.navbar} onClick={()=>{props.setNav('list')}}>신청리스트</div>
                 <div className={styles.navbar} onClick={()=>{props.setNav('black')}}>블랙리스트</div>
-                <div className={styles.navbar} onClick={()=>{}}>신청 금지/해제</div>
+                <div className={styles.navbar} onClick={()=>{props.setBanDate(true)}}>신청 금지/해제</div>
                 <div className={styles.navbar}>엑셀 추출</div>
             </div>
 

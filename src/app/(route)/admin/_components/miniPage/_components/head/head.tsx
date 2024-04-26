@@ -1,7 +1,8 @@
+import { Dispatch, SetStateAction } from 'react';
 import styles from './head.module.css';
 
 type navbar = 'list' | 'black' | 'forbid';
-export default function Head(props:{nav:navbar}){
+export default function Head(props:{nav:navbar, setBlackList:Dispatch<SetStateAction<boolean>>}){
     return(
         <div className={styles.main}>
             <div className={styles.headContainer}>
@@ -18,7 +19,8 @@ export default function Head(props:{nav:navbar}){
                 </div>
                 {
                     props.nav === "black"?
-                    <div className={styles.btnContainer}>
+                    <div className={styles.btnContainer} 
+                    onClick={()=>{props.setBlackList(true)}}>
                     리스트 추가  +
                     </div>
                     :

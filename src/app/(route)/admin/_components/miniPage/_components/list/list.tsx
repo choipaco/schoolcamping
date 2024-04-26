@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Item from './_components/item/item';
 import styles from './list.module.css';
 import getCalendarListAdmin from '@/app/_service/admin';
@@ -25,21 +25,17 @@ interface student{
     studentId:string,
     studentName:string
 }
-export default function List(props:{date: date}){
+export default function List(props:{date: date, reload: boolean, setReload:Dispatch<SetStateAction<boolean>>}){
 
     const [data,setData] = useState<Data[]>();
     const handleGetList = async() =>{
         setData(await getCalendarListAdmin(props.date.year,props.date.month));
     }
     useEffect(()=>{
-        if(props.date){
+        if(props.date || props.reload){
             handleGetList();
         }
-    },[props.date.month])
-
-    useEffect(()=>{
-        console.log(data)
-    },[data])
+    },[props.date.month,props.reload])
     return(
         <div className={styles.main}>
             {

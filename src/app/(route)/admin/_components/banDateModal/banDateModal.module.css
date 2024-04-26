@@ -1,0 +1,124 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.34);
+}
+.modalContainer{
+    position: relative;
+    z-index: 11;
+    width: 40%;
+    height: 90%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.header{
+    width: 100%;
+    height: 80px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 8px 8px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.next{
+font-family: 'Font Awesome 6 Free';
+font-style: normal;
+font-weight: 900;
+font-size: 32px;
+line-height: 32px;
+text-align: center;
+letter-spacing: -0.04em;
+color: #000000;
+margin-right: 30px;
+}
+
+.prev{
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin-left: 30px;
+    }
+.month{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 38px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #000000;
+}
+
+.nav{
+    width: 30%;
+    margin: 5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.seletedNavBtn{
+    width: 80px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 9999px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    border: 1.5px solid #5467F5;
+    color: #5467F5;
+}
+
+.navBtn{
+    width: 80px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 9999px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    border: 1.5px solid #808080;
+    color: #808080;
+
+}
+
+.titleContainer{
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+    letter-spacing: -0.02em;
+    margin: 0 5%;
+    color: #000000;
+
+
+}
+
+.bodyContainer{
+    margin: 5%;
+}

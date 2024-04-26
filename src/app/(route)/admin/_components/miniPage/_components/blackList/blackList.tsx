@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Item from './_components/item/item';
 import styles from './blackList.module.css';
 import getCalendarListAdmin, { getBlackList } from '@/app/_service/admin';
@@ -9,19 +9,19 @@ interface black{
 }
 
 
-export default function BlackList(){
+export default function BlackList(props:{reload:boolean, setReload:Dispatch<SetStateAction<boolean>>}){
 
     const [data,setData] = useState<black[]>();
     const handleGetList = async() =>{
         setData(await getBlackList());
     }
     useEffect(()=>{
-        handleGetList();
-    },[])
+        if(props.reload){
+            handleGetList();
+            props.setReload(false);
+        }
+    },[props.reload])
 
-    useEffect(()=>{
-        console.log(data)
-    },[data])
     return(
         <div className={styles.main}>
             {
@@ -40,7 +40,7 @@ export default function BlackList(){
                     {
                         data?.map((it,idx)=>{
                             return(
-                                <Item key={idx} data={it}/>
+                                <Item key={idx} data={it} setReload={props.setReload}/>
                             )
                         })
                     }

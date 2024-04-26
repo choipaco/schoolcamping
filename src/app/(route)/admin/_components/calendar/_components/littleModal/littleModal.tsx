@@ -22,9 +22,6 @@ export default function Little(props: {modal:boolean, setModal:Dispatch<SetState
         };
       }, [divRef]);
 
-      useEffect(()=>{
-        console.log(props.day, props.month)
-      },[props.day])
 
       const handleClickUpdate = () => {
         props.setMiniChoice('update');

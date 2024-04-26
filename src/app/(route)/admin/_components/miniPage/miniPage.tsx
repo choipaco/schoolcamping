@@ -8,17 +8,17 @@ interface date{
     month: number
 }
 type navbar = 'list' | 'black';
-export default function MiniPage(props:{nav:navbar, setNav:Dispatch<SetStateAction<navbar>>, date:date}){
+export default function MiniPage(props:{nav:navbar, setNav:Dispatch<SetStateAction<navbar>>, date:date,reload:boolean, setReload:Dispatch<SetStateAction<boolean>>, setBlackList:Dispatch<SetStateAction<boolean>>, blackreload:boolean, setBlackreload:Dispatch<SetStateAction<boolean>>}){
     
     return(
         <div className={styles.main}>
             <div className={styles.container}>
-                <Head nav={props.nav}/>
+                <Head nav={props.nav} setBlackList={props.setBlackList}/>
                 {
                     props.nav === "list" ?
-                    <List date={props.date}/>
+                    <List date={props.date} reload={props.reload} setReload={props.setReload}/>
                     :
-                    <BlackList/>
+                    <BlackList reload={props.blackreload} setReload={props.setBlackreload}/>
                 }
             </div>
         </div>
