@@ -14,7 +14,6 @@ import {
   isBrowser,
   isMobile
 } from "react-device-detect";
-import viewport from "@/utils/viewport";
 type navbar = 'list' | 'black';
 type miniChoice = 'update' | 'delete' | 'none';
 export default function Home() {
@@ -32,9 +31,6 @@ export default function Home() {
     }
   },[nav])
   return (
-    <>    
-    {
-      viewport() ?
       <main>
         <Calendar reload={reload} setReload={setReload} nav={nav} setNav={setNav} date={date} setDate={setDate} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setData={setData} setBanDate={setBanDate}/>
         <MiniPage nav={nav} setNav={setNav} date={date} reload={reload} setReload={setReload} setBlackList={setBlackList} blackreload={blackreload} setBlackreload={setBlackReload}/>
@@ -63,9 +59,5 @@ export default function Home() {
           ""
         }
       </main>
-      :
-      <></>
-    }
-    </>
   );
 }

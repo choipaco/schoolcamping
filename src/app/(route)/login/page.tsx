@@ -12,7 +12,6 @@ import {
   isBrowser,
   isMobile
 } from "react-device-detect";
-import viewport from "@/utils/viewport";
 
 export default function Home() {
   const router = useRouter();
@@ -30,9 +29,6 @@ export default function Home() {
     }
   };
   return (
-    <>
-    {
-      viewport() ?
         <main className={styles.main}>
           <div className={styles.container}>
             <div className={styles.margin}>
@@ -46,10 +42,5 @@ export default function Home() {
             </div>
           </div>
         </main>
-        :
-        <></>
-    }
-    </>
-    
   );
 }
