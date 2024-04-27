@@ -22,12 +22,12 @@ export default function Home() {
   const [miniChoice,setMiniChoice] = useState<miniChoice>('none');
   const [data, setData] = useState<any>();
   const [reload,setReload] = useState(true);
-  const [blackreload,setBlackReload] = useState(true);
+  const [blackreload,setBlackReload] = useState({value: true});
   const [blackList,setBlackList] = useState(false);
   const [banDate, setBanDate] = useState(false);
   useEffect(()=>{
     if(nav === 'black'){
-      setBlackReload(true);
+      setBlackReload({value: true});
     }
   },[nav])
   return (

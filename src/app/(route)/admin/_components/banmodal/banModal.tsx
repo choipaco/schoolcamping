@@ -8,7 +8,9 @@ import Image from 'next/image';
 import { addBlackList, updateCalendarAdmin } from '@/app/_service/admin';
 import { createClassroomData } from '@/utils/form';
 
-export default function BanModal(props:{modal:boolean, setModal:Dispatch<SetStateAction<boolean>>, setReload:Dispatch<SetStateAction<boolean>>}) {
+export default function BanModal(props:{modal:boolean, setModal:Dispatch<SetStateAction<boolean>>, setReload:Dispatch<SetStateAction<{
+    value: boolean;
+}>>}) {
     const { addAlert } = useAlert();
     const [stu, setStu] = useState('');
     const [ban, setBan] = useState('');
@@ -28,7 +30,7 @@ export default function BanModal(props:{modal:boolean, setModal:Dispatch<SetStat
 
         if(res){
             addAlert("추가완료",true);
-            props.setReload(true);
+            props.setReload({value: true});
             props.setModal(false);
             setStu('')
             setBan('')
@@ -58,6 +60,7 @@ export default function BanModal(props:{modal:boolean, setModal:Dispatch<SetStat
                     value={stu}
                     onChange={(e)=>{setStu(e.target.value)}}
                     className={styles.input}
+                    maxLength={9}
                     />
                 </div>
                 <div className={styles.inputContainer}>
@@ -69,6 +72,7 @@ export default function BanModal(props:{modal:boolean, setModal:Dispatch<SetStat
                     value={ban}
                     onChange={(e)=>{setBan(e.target.value)}}
                     className={styles.textArea}
+                    maxLength={100}
                     />
                 </div>
 

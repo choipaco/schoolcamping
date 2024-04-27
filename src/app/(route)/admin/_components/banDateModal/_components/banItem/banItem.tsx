@@ -85,6 +85,7 @@ export default function BanItem({ date, reload, setReload, setCalendarReload }: 
           value={ban}
           onChange={(e) => setBan(e.target.value)}
           className={styles.textInput} 
+          maxLength={100}
         />
         <div className={styles.btnContainer}>
           <button onClick={handleOnClickSubmit} className={styles.btn}>금지하기</button>

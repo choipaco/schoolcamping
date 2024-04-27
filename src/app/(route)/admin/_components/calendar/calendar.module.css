@@ -1,12 +1,15 @@
 .main{
     position: fixed;
     top: 0;
-    width: 65%;
+    width: 60%;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .calendarContainer{
-    margin: 2% 10% 2% 5%;
+    width: 85%;
     padding: 0  5% 3% 5%;
     background: #FFFFFF;
     border: 1px solid #CCCCCC;
@@ -31,12 +34,4 @@
     margin-top: 20px;
 }
 
-
-@media screen and (max-width: 1300px){ 
-    .calendarContainer{
-        margin: 10%;
-        margin-top: 5%;
-        margin-left: 3%;
-    }
-}
 

@@ -7,9 +7,13 @@
     /* background-image: url("../../../../public/assets/img/test.jpg"); */
     background-position: center;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .calendarContainer{
+    width: 100%;
     margin: 0 8%;
     background-color: #ffffff;
     padding: 0 50px;
@@ -62,12 +66,4 @@
 .adminTitle{
     display: flex;
     align-items: flex-end;
-}
-
-
-@media screen and (max-width: 1300px) {
-    .calendarContainer{
-        margin-top: 50px;
-    }
-    
 }

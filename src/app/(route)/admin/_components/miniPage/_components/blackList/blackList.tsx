@@ -9,16 +9,20 @@ interface black{
 }
 
 
-export default function BlackList(props:{reload:boolean, setReload:Dispatch<SetStateAction<boolean>>}){
+export default function BlackList(props:{reload:{
+    value: boolean;
+}, setReload:Dispatch<SetStateAction<{
+    value: boolean;
+}>>}){
 
     const [data,setData] = useState<black[]>();
     const handleGetList = async() =>{
         setData(await getBlackList());
     }
     useEffect(()=>{
-        if(props.reload){
+        if(props.reload.value){
             handleGetList();
-            props.setReload(false);
+            props.setReload({value: false});
         }
     },[props.reload,props.setReload])
 

@@ -9,13 +9,15 @@ interface black{
     studentId:string,
     reason: string
 }
-export default function Item(props:{data:black, setReload:Dispatch<SetStateAction<boolean>>}){
+export default function Item(props:{data:black, setReload:Dispatch<SetStateAction<{
+    value: boolean;
+}>>}){
     const {addAlert} = useAlert();
     const handleOnClickDeleteBlackList = async() => {
         const res = await deleteBlackList(props.data.studentId);
         if(res){
             addAlert('성공적으로 해제되었습니다', true);
-            props.setReload(true);
+            props.setReload({value: true});
         }else{
             addAlert('해제에 실패했습니다', false);
         }

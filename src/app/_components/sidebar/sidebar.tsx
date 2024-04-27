@@ -4,7 +4,7 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
   
 export default function Sidebar(){
-   const [tool, setTool] = useState(['가위','전자렌지','수저','가위','가위','가위','가위','가위'])
+   const [tool, setTool] = useState(['가위','전자렌지','수저','전기포트','불판','앞접시','집게','가스버너'])
     return(
         <div className={styles.main}>
             <div className={styles.sidebarContainer}>
