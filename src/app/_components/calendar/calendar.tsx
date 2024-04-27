@@ -10,15 +10,18 @@ import { submitCalendar } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import UpdateModal from './_components/updateModal/updateModal';
 
 type pass = "create" | 'auth';
 
 export default function Calendar(){
     const { addAlert } = useAlert();
     const [modal,setModal] = useState(false);
+    const [updateModal,setUpdateModal] = useState(false);
     const [passwordModal,setPasswordModal] = useState(false);
     const [passwordMode,setPasswordMode] = useState<pass>('create')
     const [data, setData] = useState<any>()
+    const [updateData,setUpdateData] = useState<any>();
     const [submit,setSubmit] = useState<any>();
     const [password,setPassword] = useState('');
     const [reload,setReload] = useState(true);
@@ -86,8 +89,9 @@ export default function Calendar(){
                 </div>
                 <div className={styles.calendarItem}>
                     <CalendarList date={day} setData={setData} reload={reload} setReload={setReload}/>
-                    <Modal modal={modal} setModal={setModal} data={data} setSubmit={setSubmit} setData={setData} />
-                    <PasswordModal modal={passwordModal} setModal={setPasswordModal} setPassword={setPassword} setData={setData} mode={passwordMode}/>
+                    <Modal modal={modal} setModal={setModal} data={data} setSubmit={setSubmit} setData={setData}/>
+                    <UpdateModal modal={updateModal} setModal={setUpdateModal} data={updateData} setData={setUpdateData} setReload={setReload}/>
+                    <PasswordModal modal={passwordModal} setModal={setPasswordModal} setPassword={setPassword} data={data} setData={setData} mode={passwordMode} setUpdateModal={setUpdateModal} setUpdateData={setUpdateData}/>
                 </div>
             </div>
         </div>

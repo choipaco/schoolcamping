@@ -1,6 +1,6 @@
 import axiosInstance from "@/utils/axiosInstance";
-import { parseStudentInput } from "@/utils/form";
-import { processDates } from "@/utils/time";
+import { createDatesArray, parseStudentInput } from "@/utils/form";
+import { getDatesInRange, processDates } from "@/utils/time";
 import axios from "axios";
 
 
@@ -84,4 +84,70 @@ export async function deleteBlackList(studentId:string) {
     } catch (error:any) {
         return false;
     }
+}
+
+
+export async function banDate(year:number, month:number, startDate:number, endDate:number, reason:string) {
+    const data = createDatesArray(year,month,startDate,endDate,reason)
+    try {
+        await axiosInstance.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/disable`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return true;
+    } catch (error:any) {
+        return false;
+    }
+}
+export async function banDateList(year:number, month:number) {
+    try {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/disable/${year}/${month}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return res.data;
+    } catch (error:any) {
+        return false;
+    }
+}
+
+export async function banDateDelete(startDate:string,endDate:string){
+    const data = getDatesInRange(startDate,endDate);
+    try {
+        await axiosInstance.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/enable`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return true;
+    } catch (error:any) {
+        return false;
+    }
+}
+
+export async function getExecl(year:number,month:number) {
+    try {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/excel/${year}/${month}`, {
+            responseType: 'blob'
+        });
+        return res.data
+    } catch (error:any) {
+        window.location.href = './login';
+    }
+}
+
+
+export async function deleteCalendar(id:number) {
+    try {
+        await axiosInstance.delete(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/${id}`, {});
+        return true;
+    } catch (error:any) {
+        return false;
+    }
+    
 }

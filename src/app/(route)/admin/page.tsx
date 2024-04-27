@@ -7,6 +7,7 @@ import { getYearAndMonth } from "@/utils/time";
 import Modal from "./_components/modal/modal";
 import BanModal from "./_components/banmodal/banModal";
 import BanDateModal from "./_components/banDateModal/banDateModal";
+import DeleteModal from "./_components/deleteModal/deleteModal";
 type navbar = 'list' | 'black';
 type miniChoice = 'update' | 'delete' | 'none';
 export default function Home() {
@@ -42,10 +43,9 @@ export default function Home() {
         <Modal setReload={setReload} setData={setData} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice}/>
         :
         miniChoice === "delete" ?
-        ""
+        <DeleteModal date={date} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setReload={setReload}/>
         :
         ""
-
       }
     </main>
   );

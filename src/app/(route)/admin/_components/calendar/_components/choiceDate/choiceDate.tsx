@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import styles from './choiceDate.module.css'
+import { getExecl } from '@/app/_service/admin';
 interface date{
     year: number
     month: number
@@ -34,6 +35,23 @@ export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAc
             month
         })
     }
+
+    const handleOnClickGetExcel = async () => {
+        try {
+            const blob = await getExecl(props.date.year, props.date.month); // 엑셀 파일 받기
+            const downloadUrl = window.URL.createObjectURL(blob); // blob에서 다운로드 URL 생성
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.setAttribute('download', `${props.date.year}년 ${props.date.month}월 스쿨캠핑 리스트.xlsx`); // 다운로드될 파일명 설정
+            document.body.appendChild(link);
+            link.click();
+            link.remove();  // 사용한 링크 요소 제거
+            window.URL.revokeObjectURL(downloadUrl); // 생성된 URL 해제
+        } catch (error) {
+            console.error('엑셀 파일 다운로드 실패:', error);
+        }
+    };
+    
     return(
         <div className={styles.main}>
             <div className={styles.main}>
@@ -50,7 +68,7 @@ export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAc
                 <div className={styles.navbar} onClick={()=>{props.setNav('list')}}>신청리스트</div>
                 <div className={styles.navbar} onClick={()=>{props.setNav('black')}}>블랙리스트</div>
                 <div className={styles.navbar} onClick={()=>{props.setBanDate(true)}}>신청 금지/해제</div>
-                <div className={styles.navbar}>엑셀 추출</div>
+                <div className={styles.navbar} onClick={handleOnClickGetExcel}>엑셀 추출</div>
             </div>
 
         </div>

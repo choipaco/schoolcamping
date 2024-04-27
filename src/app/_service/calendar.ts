@@ -8,6 +8,7 @@ export default async function getCalendarList(year:number, month:number) {
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/calendar/${year}/${month}`, {
         });
+        console.log(res)
         return processDates(year,month,res.data); 
     } catch (error:any) {
         alert(error.response.data.message);
@@ -39,7 +40,6 @@ export async function submitCalendar(data:any) {
 
 export async function validateStudent(leaderInput:string, studentsInput: { value: string }[],reservationDate: string) {
     const data = validate(leaderInput,studentsInput,reservationDate)
-
     if(!data) return false;
     try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping/validate/student`, {
@@ -52,6 +52,40 @@ export async function validateStudent(leaderInput:string, studentsInput: { value
         });
 
         return res.status;
+    } catch (error:any) {
+        return error.response.status;
+    }
+}
+
+
+
+
+export async function calendarLogin(password: string,reservationId:number) {
+    try {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/auth/login/reservation`, {
+            reservationId,
+            password
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }   
+        });
+
+        return res.data;
+    } catch (error:any) {
+        return false;
+    }
+}
+
+export async function updateCalendar(data:any) {
+    try {
+        await axios.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping`,data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return true;
     } catch (error:any) {
         return false;
     }

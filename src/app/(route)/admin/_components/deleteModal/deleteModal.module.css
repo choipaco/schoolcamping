@@ -1,0 +1,89 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.34);
+}
+.modalContainer{
+    position: relative;
+    z-index: 11;
+    width: 30%;
+    height: 40%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.modalMargin{
+    margin: 8% 8% 8% 5%;
+}
+
+.title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 46px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #000000;
+}
+
+.subTitle{
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 35px;
+    letter-spacing: -0.02em;
+
+    color: #333333;
+}
+.btn{
+    margin-top: 18%;
+    display: flex;
+    justify-content: flex-end;
+}
+.nope{
+    width: 100px;
+    height: 45px;
+    background: #FFFFFF;
+    border: 1px solid #5467F5;
+    border-radius: 32px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #5467F5;
+}
+
+.yes{
+    width: 100px;
+    height: 45px;
+    background: #5467F5;
+    border: 1px solid #5467F5;
+    border-radius: 32px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    margin-left: 10px;
+}

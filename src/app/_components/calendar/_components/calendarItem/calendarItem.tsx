@@ -5,6 +5,7 @@ import { useAlert } from '@/app/_contexts/AlertContext';
 interface Day{
     date?: string;
     status?: string
+    info?: any
 }
 export default function CalendarItem(props:{day:Day, setData:Dispatch<SetStateAction<any>>}){
     const { addAlert } = useAlert();

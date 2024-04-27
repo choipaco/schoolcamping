@@ -28,10 +28,17 @@ margin-top: 10px;
 background: #FFFFFF;
 border: 1px solid #C0C0C0;
 border-radius: 8px;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 29px;
+display: flex;
+align-items: center;
+letter-spacing: -0.02em;
 
 }
 
-.midleContainer{
+.middleContainer{
 font-style: normal;
 font-weight: 500;
 font-size: 32px;
@@ -68,4 +75,18 @@ margin: 0 auto;
     text-align: center;
     letter-spacing: -0.02em;
     color: #FFFFFF;
+}
+
+.dateItems{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #333333;
+
+
 }

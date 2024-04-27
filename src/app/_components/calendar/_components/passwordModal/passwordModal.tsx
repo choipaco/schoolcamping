@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, createRef, useEffect, useState } from 'react';
 import styles from './passwordModal.module.css';
 import PasswordInput from './_components/PasswordInput';
+import { calendarLogin } from '@/app/_service/calendar';
 
 type pass = "create" | 'auth';
-export default function PasswordModal(props: { modal: boolean, setModal: Dispatch<SetStateAction<boolean>>, setPassword:Dispatch<SetStateAction<string>>, setData:Dispatch<SetStateAction<any>>, mode:pass}) {
+export default function PasswordModal(props: { modal: boolean, setModal: Dispatch<SetStateAction<boolean>>, setPassword:Dispatch<SetStateAction<string>>,data:any, setData:Dispatch<SetStateAction<any>>, mode:pass, setUpdateModal:Dispatch<SetStateAction<boolean>>,setUpdateData:Dispatch<SetStateAction<any>>}) {
     const [inputValues, setInputValues] = useState(["", "", "", ""]); // 입력 값 배열 상태 생성
     const [password, setPassword] = useState("");
     const inputRefs = Array(4).fill(0).map(() => createRef<HTMLInputElement>());
@@ -37,8 +38,23 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
         props.setModal(false);
         props.setData("");
         setTitle("비밀번호 입력")
-    }
-
+      }
+      const handleOnChangePasswordChk = async() =>{
+        const res = await calendarLogin(inputValues[0]+inputValues[1]+inputValues[2]+inputValues[3],props.data.id);
+        
+        if(res){
+          props.setUpdateData({...res, password: inputValues[0]+inputValues[1]+inputValues[2]+inputValues[3]});
+          props.setUpdateModal(true);
+          setInputValues(["", "", "", ""])
+          props.setData('');
+          setPassword("")
+          setPasswordWrong(false)
+          props.setModal(false);
+          setTitle("비밀번호 입력")
+        }else{
+          setPasswordWrong(true);
+        }
+      }
     useEffect(()=>{
         if(inputValues[0] && inputValues[1] && inputValues[2] && inputValues[3]){
             if(password){
@@ -61,7 +77,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
                 inputRefs[0].current?.focus();
                 setTitle("비밀번호 재입력")
               }else{
-                
+                handleOnChangePasswordChk()
               }
             }
         }else{

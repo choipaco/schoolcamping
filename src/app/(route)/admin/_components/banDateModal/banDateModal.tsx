@@ -8,18 +8,31 @@ import Image from 'next/image';
 import { updateCalendarAdmin } from '@/app/_service/admin';
 import { createClassroomData } from '@/utils/form';
 import BanItem from './_components/banItem/banItem';
+import BanList from './_components/banList/banList';
 
 type banChoice = 'ban' | 'pardon';
 export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<SetStateAction<boolean>>,setReload:Dispatch<SetStateAction<boolean>>, data:any,}) {
     const { addAlert } = useAlert();
-    const [day,setDay] = useState<any>();
+    const [day,setDay] = useState<any>(props.data.month);
     const [banChoice, setBanChoice] = useState<banChoice>('ban');
-
-    useEffect(()=>{
-        console.log(props.data)
-    },[props.data])
-
-
+    const [reload, setReload] = useState(true);
+    const [reloadList, setReloadList] = useState(true);
+    const handleOnClickPrev = () =>{
+        if(day - 1 === 0){
+            return addAlert('이번년도 만 금지 할 수 있습니다', false);
+        }
+        setDay(day - 1);
+        setReload(true);
+        setReloadList(true)
+    }
+    const handleOnClickNext = () =>{
+        if(day + 1 === 13){
+            return addAlert('이번년도 만 금지 할 수 있습니다', false);
+        }
+        setDay(day + 1);
+        setReload(true);
+        setReloadList(true)
+    }
 
 
     const handleOnClickBackground = () => {
@@ -27,18 +40,13 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
         props.setModal(false);
     }
 
-    const handleOnClickSubmit = async() =>{
-        // if(!boss) return addAlert("대표자를 입력해주세요",false);
-        // if(!teacher) return addAlert("선생님 성함을 입력해주세요",false);
-        // if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
-
-        const res = 'shangus';
-        if(res){
-            addAlert("수정완료",true);
+    useEffect(()=>{
+        if(banChoice === 'ban'){
+            setReload(true);
         }else{
-            addAlert("수정에 실패했습니다",false);
+            setReloadList(true);
         }
-    }
+    },[banChoice])
     return(
         <div className={styles.main}
         style={props.modal ? {display: 'flex'} : {display: 'none'}}
@@ -46,13 +54,13 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
             <div className={styles.background} onClick={handleOnClickBackground}/>
             <div className={styles.modalContainer}>
                 <div className={styles.header}>
-                    <div className={styles.prev}>
+                    <div className={styles.prev} onClick={handleOnClickPrev}>
                     {`<`}
                     </div>
                     <div className={styles.month}>
-                    5월
+                    {day}월
                     </div>
-                    <div className={styles.next}>
+                    <div className={styles.next} onClick={handleOnClickNext}>
                     {`>`}
                     </div>
                 </div>
@@ -80,7 +88,12 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
                     }
                 </div>
                 <div className={styles.bodyContainer}>
-                    <BanItem/>
+                    {
+                        banChoice === 'ban' ?
+                        <BanItem date={day} reload={reload} setReload={setReload} setCalendarReload={props.setReload}/>
+                        :
+                        <BanList date={day} reloadList={reloadList}  setReloadList={setReloadList}/>
+                    }
                 </div>
             </div>
         </div>

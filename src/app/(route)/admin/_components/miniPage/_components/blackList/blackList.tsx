@@ -20,7 +20,7 @@ export default function BlackList(props:{reload:boolean, setReload:Dispatch<SetS
             handleGetList();
             props.setReload(false);
         }
-    },[props.reload])
+    },[props.reload,props.setReload])
 
     return(
         <div className={styles.main}>
