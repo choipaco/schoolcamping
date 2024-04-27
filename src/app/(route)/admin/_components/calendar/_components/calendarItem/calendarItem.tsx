@@ -81,7 +81,7 @@ export default function CalendarItem(props:{day:Day,month:number, year:number, s
             </div>
             {
                 props.day.status === "예약 완료" ?
-                <Little modal={modal} setModal={setModal} day={props.day.date} month={props.month} year={props.year} setMiniChoice={props.setMiniChoice}/>
+                <Little key={''} modal={modal} setModal={setModal} day={props.day.date} month={props.month} year={props.year} setMiniChoice={props.setMiniChoice}/>
                 :
                 ""
             }

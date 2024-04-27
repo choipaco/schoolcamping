@@ -79,7 +79,7 @@ export default function CalendarList(props:{date:date, setData:Dispatch<SetState
                             <td key={index} className={styles.body}>
                                 {
                                     day.date ?
-                                    <CalendarItem day={day} month={props.date.month} year={props.date.year} setData={props.setData} setMiniChoice={props.setMiniChoice}/>
+                                    <CalendarItem key={''} day={day} month={props.date.month} year={props.date.year} setData={props.setData} setMiniChoice={props.setMiniChoice}/>
                                     :
                                     <></>
                                 }

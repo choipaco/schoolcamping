@@ -103,9 +103,9 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
                 <div className={styles.bodyContainer}>
                     {
                         banChoice === 'ban' ?
-                        <BanItem date={day} reload={reload.value} setReload={setReload} setCalendarReload={props.setReload}/>
+                        <BanItem key={''} date={day} reload={reload.value} setReload={setReload} setCalendarReload={props.setReload}/>
                         :
-                        <BanList date={day} reloadList={reloadList.value}  setReloadList={setReloadList} setCalendarReload={props.setReload}/>
+                        <BanList key={''} date={day} reloadList={reloadList.value}  setReloadList={setReloadList} setCalendarReload={props.setReload}/>
                     }
                 </div>
             </div>
