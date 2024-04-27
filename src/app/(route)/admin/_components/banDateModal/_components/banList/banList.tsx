@@ -44,9 +44,9 @@ export default function BanList(props:{date:any, reloadList:boolean, setReloadLi
                 </thead>
                 <tbody>
                     {
-                        list.map((it:any)=>{
+                        list.map((it:any,idx:number)=>{
                             return(
-                                <tr>
+                                <tr key={idx}>
                                     <td className={styles.body}>{formatDateRange(it.startDate,it.endDate)}</td>
                                     <td className={styles.body}>{it.reason}</td>
                                     <td className={`${styles.body} ${styles.cancle}`} onClick={()=>{handleOnClickDeleteDate(it.startDate,it.endDate)}}>
