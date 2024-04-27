@@ -6,6 +6,14 @@ import loginApi from "@/app/_service/auth";
 import { useAlert } from "@/app/_contexts/AlertContext";
 import { useRouter } from "next/navigation";
 import { setCookie } from "@/utils/cookies";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
+import viewport from "@/utils/viewport";
+
 export default function Home() {
   const router = useRouter();
   const [pw, setPw] = useState('');
@@ -22,18 +30,26 @@ export default function Home() {
     }
   };
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.margin}>
-          <div className={styles.title}>
-          관리자 로그인
+    <>
+    {
+      viewport() ?
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <div className={styles.margin}>
+              <div className={styles.title}>
+              관리자 로그인
+              </div>
+              <div className={styles.passwordContainer}>
+                <input className={styles.input} type="password" value={pw} onChange={(e)=>{setPw(e.target.value)}}/>
+                <button className={styles.btn} onClick={onSubmit}>{`->`}</button>
+              </div>
+            </div>
           </div>
-          <div className={styles.passwordContainer}>
-            <input className={styles.input} type="password" value={pw} onChange={(e)=>{setPw(e.target.value)}}/>
-            <button className={styles.btn} onClick={onSubmit}>{`->`}</button>
-          </div>
-        </div>
-      </div>
-    </main>
+        </main>
+        :
+        <></>
+    }
+    </>
+    
   );
 }

@@ -1,25 +1,31 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styles from './banItem.module.css';
-import { createDatesArray, getDaysOfMonth } from '@/utils/form';
+import { getDaysOfMonth } from '@/utils/form'; // 가정: createDatesArray 함수는 사용되지 않으므로 제거
 import { banDate } from '@/app/_service/admin';
 import { useAlert } from '@/app/_contexts/AlertContext';
 
-export default function BanItem(props: { date: number, reload:boolean,setReload:Dispatch<SetStateAction<boolean>>,setCalendarReload:Dispatch<SetStateAction<boolean>> }) {
-  const {addAlert} = useAlert();
-  const [date, setDate] = useState<number[]>([]);
+// props를 구조 분해 할당으로 받습니다.
+export default function BanItem({ date, reload, setReload, setCalendarReload }: { date: number, reload: boolean, setReload: Dispatch<SetStateAction<{
+  value: boolean;
+}>>, setCalendarReload: Dispatch<SetStateAction<boolean>> }) {
+  const { addAlert } = useAlert();
+  const [dates, setDates] = useState<number[]>([]);
   const [startDate, setStartDate] = useState<number>(1);
-  const [endDate, setEndDate] = useState<number>(date[date.length - 1]);
-  const [ban,setBan] = useState('');
-  useEffect(()=>{
-    if(props.reload){
-      setDate(getDaysOfMonth(props.date))
-      props.setReload(false);
+  const [endDate, setEndDate] = useState<number>(dates[dates.length - 1] || 1); // 초기값 설정에 dates 사용
+  const [ban, setBan] = useState('');
+
+  useEffect(() => {
+    if (reload) {
+      setDates(getDaysOfMonth(date));
+      setReload({value: false});
+      console.log("리로드 완료");
     }
-  },[props.reload,props.setReload])
-  
-  useEffect(()=>{
-    setEndDate(date[date.length - 1])
-  },[date])
+  }, [reload, date, setReload]);
+
+  useEffect(() => {
+    setEndDate(dates[dates.length - 1] || 1);
+  }, [dates]);
+
   const handleOnChangeStartDate = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const dateValue = parseInt(event.target.value, 10);
     setStartDate(dateValue);
@@ -38,21 +44,22 @@ export default function BanItem(props: { date: number, reload:boolean,setReload:
     }
   };
 
-  const handleOnClickSubmit = async() => {
-   const res = await banDate(new Date().getFullYear(),props.date,startDate,endDate,ban);
+  const handleOnClickSubmit = async () => {
+    const res = await banDate(new Date().getFullYear(), date, startDate, endDate, ban);
 
-   if(res){
-    addAlert('성공적으로 금지됐습니다', true);
-    props.setCalendarReload(true);
-   }
-  }
+    if (res) {
+      addAlert('성공적으로 금지됐습니다', true);
+      setCalendarReload(true);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.startEndContainer}>
         <div className={styles.startContainer}>
           <label className={styles.subTitle}>시작일</label><br />
           <select className={styles.choiceDate} value={startDate} onChange={handleOnChangeStartDate}>
-            {date.map((it) => (
+            {dates.map((it) => (
               <option key={it} value={it} className={styles.dateItems}>
                 {it}일
               </option>
@@ -63,7 +70,7 @@ export default function BanItem(props: { date: number, reload:boolean,setReload:
         <div className={styles.startContainer}>
           <label className={styles.subTitle}>종료일</label><br />
           <select className={styles.choiceDate} value={endDate} onChange={handleOnChangeEndDate}>
-            {date.map((it) => (
+            {dates.map((it) => (
               <option key={it} value={it} className={styles.dateItems}>
                 {it}일
               </option>
@@ -73,12 +80,12 @@ export default function BanItem(props: { date: number, reload:boolean,setReload:
       </div>
       <div className={styles.banContainer}>
         <label className={styles.subTitle}>금지사유</label><br />
-        <div className={styles.textInputContainer}>
-          <textarea placeholder='금지하는 이유' 
+        <textarea 
+          placeholder='금지하는 이유' 
           value={ban}
-          onChange={(e)=>{setBan(e.target.value)}}
-          className={styles.textInput} />
-        </div>
+          onChange={(e) => setBan(e.target.value)}
+          className={styles.textInput} 
+        />
         <div className={styles.btnContainer}>
           <button onClick={handleOnClickSubmit} className={styles.btn}>금지하기</button>
         </div>

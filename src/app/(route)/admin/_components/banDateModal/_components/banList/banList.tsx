@@ -5,7 +5,9 @@ import { getDatesInRange, formatDateRange } from '@/utils/time';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
 
-export default function BanList(props:{date:any, reloadList:boolean, setReloadList:Dispatch<SetStateAction<boolean>>}){
+export default function BanList(props:{date:any, reloadList:boolean, setReloadList:Dispatch<SetStateAction<{
+    value: boolean;
+}>>, setCalendarReload:Dispatch<SetStateAction<boolean>>}){
     const {addAlert} = useAlert();
     const [list,setList] = useState([]);
 
@@ -17,7 +19,7 @@ export default function BanList(props:{date:any, reloadList:boolean, setReloadLi
     useEffect(()=>{
         if(props.reloadList){
             getList();
-            props.setReloadList(false);
+            props.setReloadList({value: false});
         }
     },[props.reloadList,props.setReloadList])
 
@@ -26,7 +28,8 @@ export default function BanList(props:{date:any, reloadList:boolean, setReloadLi
 
         if(res){
             addAlert('성공적으로 해제했습니다',true);
-            props.setReloadList(true);
+            props.setCalendarReload(true);
+            getList();
         }
     }
     return(

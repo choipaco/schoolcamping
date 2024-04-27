@@ -8,6 +8,13 @@ import Modal from "./_components/modal/modal";
 import BanModal from "./_components/banmodal/banModal";
 import BanDateModal from "./_components/banDateModal/banDateModal";
 import DeleteModal from "./_components/deleteModal/deleteModal";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
+import viewport from "@/utils/viewport";
 type navbar = 'list' | 'black';
 type miniChoice = 'update' | 'delete' | 'none';
 export default function Home() {
@@ -25,28 +32,40 @@ export default function Home() {
     }
   },[nav])
   return (
-    <main>
-      <Calendar reload={reload} setReload={setReload} nav={nav} setNav={setNav} date={date} setDate={setDate} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setData={setData} setBanDate={setBanDate}/>
-      <MiniPage nav={nav} setNav={setNav} date={date} reload={reload} setReload={setReload} setBlackList={setBlackList} blackreload={blackreload} setBlackreload={setBlackReload}/>
-      <BanDateModal modal={banDate} setModal={setBanDate} data={date} setReload={setReload}/>
-      {
-        nav === 'black' ?
-        <BanModal modal={blackList} setModal={setBlackList} setReload={setBlackReload}/>
-        :
-        <></>
-      }
-      {
-        miniChoice === 'none' ?
-        ""
-        :
-        miniChoice === "update" ?
-        <Modal setReload={setReload} setData={setData} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice}/>
-        :
-        miniChoice === "delete" ?
-        <DeleteModal date={date} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setReload={setReload}/>
-        :
-        ""
-      }
-    </main>
+    <>    
+    {
+      viewport() ?
+      <main>
+        <Calendar reload={reload} setReload={setReload} nav={nav} setNav={setNav} date={date} setDate={setDate} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setData={setData} setBanDate={setBanDate}/>
+        <MiniPage nav={nav} setNav={setNav} date={date} reload={reload} setReload={setReload} setBlackList={setBlackList} blackreload={blackreload} setBlackreload={setBlackReload}/>
+        {
+          banDate ?
+          <BanDateModal modal={banDate} setModal={setBanDate} data={date} setReload={setReload}/>
+          :
+          <></>
+        }
+        {
+          nav === 'black' ?
+          <BanModal modal={blackList} setModal={setBlackList} setReload={setBlackReload}/>
+          :
+          <></>
+        }
+        {
+          miniChoice === 'none' ?
+          ""
+          :
+          miniChoice === "update" ?
+          <Modal setReload={setReload} setData={setData} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice}/>
+          :
+          miniChoice === "delete" ?
+          <DeleteModal date={date} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setReload={setReload}/>
+          :
+          ""
+        }
+      </main>
+      :
+      <></>
+    }
+    </>
   );
 }

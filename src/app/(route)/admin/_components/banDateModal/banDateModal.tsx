@@ -15,38 +15,51 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
     const { addAlert } = useAlert();
     const [day,setDay] = useState<any>(props.data.month);
     const [banChoice, setBanChoice] = useState<banChoice>('ban');
-    const [reload, setReload] = useState(true);
-    const [reloadList, setReloadList] = useState(true);
+    const [reload, setReload] = useState({value: true});
+    const [reloadList, setReloadList] = useState({value: true});
+    const [click, setClick] = useState(false);
+
+    const reloads = () =>{
+        console.log("리로드 시도중")
+        setReload(prev => ({value: !prev.value}));
+        setReloadList(prev => ({value: !prev.value}));
+    }
+
     const handleOnClickPrev = () =>{
         if(day - 1 === 0){
             return addAlert('이번년도 만 금지 할 수 있습니다', false);
         }
         setDay(day - 1);
-        setReload(true);
-        setReloadList(true)
+        setClick(true);
     }
+
     const handleOnClickNext = () =>{
         if(day + 1 === 13){
             return addAlert('이번년도 만 금지 할 수 있습니다', false);
         }
         setDay(day + 1);
-        setReload(true);
-        setReloadList(true)
+        setClick(true);
     }
 
-
+    useEffect(()=>{
+        if(click){
+            reloads();
+            setClick(false);
+        }
+    },[click])
+    
     const handleOnClickBackground = () => {
-
         props.setModal(false);
     }
 
     useEffect(()=>{
         if(banChoice === 'ban'){
-            setReload(true);
+            setReload(prev => ({value: !prev.value}));
         }else{
-            setReloadList(true);
+            setReloadList(prev => ({value: !prev.value}));
         }
     },[banChoice])
+
     return(
         <div className={styles.main}
         style={props.modal ? {display: 'flex'} : {display: 'none'}}
@@ -90,9 +103,9 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
                 <div className={styles.bodyContainer}>
                     {
                         banChoice === 'ban' ?
-                        <BanItem date={day} reload={reload} setReload={setReload} setCalendarReload={props.setReload}/>
+                        <BanItem date={day} reload={reload.value} setReload={setReload} setCalendarReload={props.setReload}/>
                         :
-                        <BanList date={day} reloadList={reloadList}  setReloadList={setReloadList}/>
+                        <BanList date={day} reloadList={reloadList.value}  setReloadList={setReloadList} setCalendarReload={props.setReload}/>
                     }
                 </div>
             </div>
