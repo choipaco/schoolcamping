@@ -18,7 +18,6 @@ export default function BanItem({ date, reload, setReload, setCalendarReload }: 
     if (reload) {
       setDates(getDaysOfMonth(date));
       setReload({value: false});
-      console.log("리로드 완료");
     }
   }, [reload, date, setReload]);
 

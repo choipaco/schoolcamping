@@ -42,7 +42,6 @@ export async function registerApi(email:string, id:string, password:string,repas
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res)
         if(res.status === 201){
             return true;
         }

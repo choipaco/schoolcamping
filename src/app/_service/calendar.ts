@@ -8,7 +8,6 @@ export default async function getCalendarList(year:number, month:number) {
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/calendar/${year}/${month}`, {
         });
-        console.log(res)
         return processDates(year,month,res.data); 
     } catch (error:any) {
         alert(error.response.data.message);

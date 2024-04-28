@@ -1,6 +1,6 @@
 'use client'
 import styles from "./page.module.css";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Link from "next/link";
 import loginApi from "@/app/_service/auth";
 import { useAlert } from "@/app/_contexts/AlertContext";
@@ -17,7 +17,9 @@ export default function Home() {
   const router = useRouter();
   const [pw, setPw] = useState('');
   const {addAlert} = useAlert();
-  const onSubmit = async () => {
+  const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if(!pw) return addAlert('비밀번호를 입력해주세요',false);
     const status = await loginApi(pw);
 
     if(status){
@@ -35,10 +37,10 @@ export default function Home() {
               <div className={styles.title}>
               관리자 로그인
               </div>
-              <div className={styles.passwordContainer}>
+              <form className={styles.passwordContainer} onSubmit={onSubmit}>
                 <input className={styles.input} type="password" value={pw} onChange={(e)=>{setPw(e.target.value)}}/>
-                <button className={styles.btn} onClick={onSubmit}>{`->`}</button>
-              </div>
+                <button className={styles.btn}>{`->`}</button>
+              </form>
             </div>
           </div>
         </main>

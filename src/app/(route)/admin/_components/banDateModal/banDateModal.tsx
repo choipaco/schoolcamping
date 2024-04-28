@@ -20,7 +20,6 @@ export default function BanDateModal(props:{modal:boolean, setModal:Dispatch<Set
     const [click, setClick] = useState(false);
 
     const reloads = () =>{
-        console.log("리로드 시도중")
         setReload(prev => ({value: !prev.value}));
         setReloadList(prev => ({value: !prev.value}));
     }

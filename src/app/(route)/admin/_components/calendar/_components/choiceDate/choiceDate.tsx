@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction } from 'react'
 import styles from './choiceDate.module.css'
 import { getExecl } from '@/app/_service/admin';
+import { useAlert } from '@/app/_contexts/AlertContext';
 interface date{
     year: number
     month: number
 }
 type navbar = 'list' | 'black';
 export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAction<date>>, nav:navbar, setNav:Dispatch<SetStateAction<navbar>>, setBanDate:Dispatch<SetStateAction<boolean>>}){
-
+    const {addAlert} = useAlert();
     const handleOnClickPrevDate = () => {
         let year = props.date.year;
         let month = props.date.month - 1;
@@ -47,8 +48,9 @@ export default function ChoiceDate(props:{date:date, setDate:Dispatch<SetStateAc
             link.click();
             link.remove();  // 사용한 링크 요소 제거
             window.URL.revokeObjectURL(downloadUrl); // 생성된 URL 해제
+            addAlert('엑셀다운로드 성공',true);
         } catch (error) {
-            console.error('엑셀 파일 다운로드 실패:', error);
+            addAlert('엑셀다운로드 실패',false);
         }
     };
     

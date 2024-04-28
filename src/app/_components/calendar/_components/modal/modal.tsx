@@ -52,7 +52,6 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
         if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
             
             const res = await validateStudent(boss,inputs,props.data.date);
-            console.log(res)
             if(!res) return addAlert("학번을 정확히 써주세요", false);
             if(res !== 200){
                 return addAlert("참가 불가능한 학생이 있습니다",false);

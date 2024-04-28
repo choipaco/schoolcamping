@@ -67,7 +67,6 @@ export default function UpdateModal(props:{modal:boolean,setModal:Dispatch<SetSt
         if(!boss) return addAlert("대표자를 입력해주세요",false);
         if(!teacher) return addAlert("선생님 성함을 입력해주세요",false);
         if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
-        console.log(props.data);
         const res = await updateCalendar(updateClassroomData(boss,inputs,teacher,props.data.reservationDate,props.data.id,props.data.password));
         if(res){
             addAlert("수정완료",true);

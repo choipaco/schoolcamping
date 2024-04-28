@@ -9,7 +9,6 @@ export default async function emailVerificationApi(email:string) {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res);
         alert("인증번호를 전송하였습니다");
         return true; 
     } catch (error:any) {
@@ -26,7 +25,6 @@ export async function tokenVerificationApi(email:string,token:string) {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(res);
         alert("인증되었습니다"); 
         return true;
     } catch (error:any) {

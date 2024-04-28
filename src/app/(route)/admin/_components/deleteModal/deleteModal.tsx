@@ -16,7 +16,6 @@ export default function DeleteModal(props:{date:date, data:any, miniChoice:miniC
     }
 
     const handleOnClickSubmit = async () => {
-        console.log(props.data)
         const res = await deleteCalendar(props.data.info.id);
 
         if(res){
