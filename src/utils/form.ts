@@ -19,12 +19,12 @@ interface Student {
     if (input === null) {
         return { studentId: '', studentName: '' };
     }
-
-    const match = input.match(/(\d+)([가-힣]+)/);
-    if (!match) {
-        return { studentId: '', studentName: '' };
+    let studentId = input.substring(0,4);
+    let studentName = String(input.match(/[가-힣]+/g));
+    
+    if (!studentId || !studentName) {
+          return { studentId: '', studentName: '' };
     }
-    const [, studentId, studentName] = match;
     return { studentId, studentName };
 }
   // 주어진 입력값들을 사용하여 Classroom 객체를 생성하는 함수
@@ -38,13 +38,15 @@ interface Student {
   ): Classroom | false {
     let leader: Student;
     let students: Student[] = [];
-    if(!/^\d{4}/.test(leaderInput)){
+    const num = String(leaderInput.match(/\d+/g))
+    if(num.length !== 4 || num === 'null'){
       return false;
     }else{
       leader = parseStudentInput(leaderInput);
     }
     for (const item of studentsInput) {
-      if (!/^\d{4}/.test(item.value)) {
+      const num = String(item.value.match(/\d+/g))
+      if (num.length !== 4 || num === 'null') {
         
         return false;
       }
@@ -85,7 +87,8 @@ interface Student {
       leader = parseStudentInput(leaderInput);
     }
     for (const item of studentsInput) {
-      if (!/^\d{4}/.test(item.value)) {
+      const num = String(item.value.match(/\d+/g))
+      if (num.length !== 4 || num === 'null') {
         
         return false;
       }
@@ -107,7 +110,8 @@ interface Student {
     let leader: Student;
     let students: Student[] = [];
     
-    if(!/^\d{4}/.test(leaderInput)){
+    const num = String(leaderInput.match(/\d+/g))
+    if(num.length !== 4 || num === 'null'){
       return false;
     }else{
       leader = parseStudentInput(leaderInput);
@@ -115,7 +119,7 @@ interface Student {
 
     const filteredInputs = studentsInput.filter(item => {
       // input이 비어있지 않고, 숫자 4자리로 시작하는지 확인
-      return item.value.trim().length > 0 && /^\d{4}/.test(item.value);
+      return item.value.trim().length === 4;
     });
     students = filteredInputs.map((item) => parseStudentInput(item.value));;
     students.push(leader);

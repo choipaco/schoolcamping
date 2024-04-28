@@ -36,6 +36,7 @@ export default function Calendar(){
             setReload(true);
         }else{
             addAlert("예약에 실패했습니다.", false);
+            setData('');
         }
     }
     useEffect(()=>{
