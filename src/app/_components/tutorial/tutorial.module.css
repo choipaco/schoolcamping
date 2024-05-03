@@ -1,0 +1,94 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.536);
+}
+
+.modalContainer{
+    width: 40%;
+    height: 230px;
+    position: relative;
+    z-index: 100;
+}
+.imgContainer{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.yesImg{
+    width: 150px;
+    height: 120px;
+    background-image: url('../../../../public/assets/img/infor/yes.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.successImg{
+    width: 150px;
+    height: 120px;
+    background-image: url('../../../../public/assets/img/infor/success.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.nopeImg{
+    width: 150px;
+    height: 120px;
+    background-image: url('../../../../public/assets/img/infor/nope.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+
+.state{
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin: 0 3px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 26px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    }
+    
+    
+    .complite{
+        background-color: #5467F5;
+    }
+    
+    .incomplete{
+        background-color: #0AA610;
+    }
+    .imposible{
+        background-color: #C0C0C0;
+    }
+.contentContainer{
+    margin-top: 20px;
+}
+    .content{
+        color: #ffffff;
+        display: flex;
+    }
