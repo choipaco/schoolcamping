@@ -38,7 +38,7 @@ export default function Tutorial(props:{modal:boolean, setModal:Dispatch<SetStat
                     <div className={styles.content}>
                         공휴일, 주말 등 예약이 불가능한 날은 
                         <span className={`${styles.state} ${styles.imposible}`}>
-                            완
+                            불
                         </span> 
                         예약불가능 이라고 표시됩니다.
                     </div>

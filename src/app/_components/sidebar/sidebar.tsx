@@ -11,11 +11,11 @@ export default function Sidebar(){
     setModal(true);
    }
    useEffect(()=>{
-       const storgae = localStorage.getItem("modals");
+       const storgae = localStorage.getItem("modals") === "true";
 
        if(!storgae){
         setModal(true);
-        localStorage.setItem("modals", 'yes');
+        localStorage.setItem("modals", JSON.stringify(true));
        }
    },[])
    return(
