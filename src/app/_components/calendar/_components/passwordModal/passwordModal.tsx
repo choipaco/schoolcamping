@@ -1,6 +1,5 @@
 import React, { ChangeEvent, Dispatch, KeyboardEvent, RefObject, SetStateAction, createRef, useEffect, useState } from 'react';
 import styles from './passwordModal.module.css';
-import PasswordInput from './_components/PasswordInput';
 import { calendarLogin } from '@/app/_service/calendar';
 
 type pass = "create" | 'auth';
@@ -12,7 +11,6 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
     }, [refs]);
 
     const [password, setPassword] = useState("");
-    const inputRefs = Array(4).fill(0).map(() => createRef<HTMLInputElement>());
     const [passwordWrong, setPasswordWrong] = useState(false);
     const [title, setTitle] = useState('비밀번호 입력');
     const handleChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
