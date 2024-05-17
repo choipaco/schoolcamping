@@ -1,34 +1,34 @@
-import { Dispatch, SetStateAction, createRef, useEffect, useState } from 'react';
+import React, { ChangeEvent, Dispatch, KeyboardEvent, RefObject, SetStateAction, createRef, useEffect, useState } from 'react';
 import styles from './passwordModal.module.css';
 import PasswordInput from './_components/PasswordInput';
 import { calendarLogin } from '@/app/_service/calendar';
 
 type pass = "create" | 'auth';
 export default function PasswordModal(props: { modal: boolean, setModal: Dispatch<SetStateAction<boolean>>, setPassword:Dispatch<SetStateAction<string>>,data:any, setData:Dispatch<SetStateAction<any>>, mode:pass, setUpdateModal:Dispatch<SetStateAction<boolean>>,setUpdateData:Dispatch<SetStateAction<any>>}) {
-    const [inputValues, setInputValues] = useState(["", "", "", ""]); // 입력 값 배열 상태 생성
+    const [inputValues, setInputValues] = useState(Array(4).fill('')); // 입력 값 배열 상태 생성
+    const [refs, setRefs] = useState<RefObject<HTMLInputElement>[]>([]);
+    useEffect(() => {
+      setRefs(Array(4).fill(null).map((_, i) => refs[i] || React.createRef<HTMLInputElement>()));
+    }, [refs]);
+
     const [password, setPassword] = useState("");
     const inputRefs = Array(4).fill(0).map(() => createRef<HTMLInputElement>());
     const [passwordWrong, setPasswordWrong] = useState(false);
     const [title, setTitle] = useState('비밀번호 입력');
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-        const newValues = [...inputValues];
-        newValues[index] = event.target.value;
-        setInputValues(newValues);
-      };
+    const handleChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      const nextValues = [...inputValues];
+      nextValues[index] = e.target.value;
+      setInputValues(nextValues);
 
-    const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-        if (event.key === 'Backspace' && !inputValues[index]) {
-            if (index > 0) {
-                inputRefs[index - 1].current?.focus();
-            }
-        } else {
-            if (index < inputRefs.length - 1) {
-                if(inputValues[index - 1] === "") return;
-
-                if(inputValues[0] === "") return;
-                inputRefs[index + 1].current?.focus();
-            }
-        }
+      if (e.target.value.length === 1 && index < 3) {
+        refs[index + 1].current?.focus(); 
+      }
+    };
+    
+    const handleBackspace = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Backspace' && !inputValues[index] && index > 0) {
+        refs[index - 1].current?.focus(); 
+      }
     };
 
     const handleOnClickBackground = () => {
@@ -55,6 +55,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
           setPasswordWrong(true);
         }
       }
+
     useEffect(()=>{
         if(inputValues[0] && inputValues[1] && inputValues[2] && inputValues[3]){
             if(password){
@@ -74,7 +75,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
               if(props.mode === "create"){
                 setPassword(inputValues[0]+inputValues[1]+inputValues[2]+inputValues[3]);
                 setInputValues(["", "", "", ""])
-                inputRefs[0].current?.focus();
+                refs[0].current?.focus(); 
                 setTitle("비밀번호 재입력")
               }else{
                 handleOnChangePasswordChk()
@@ -87,9 +88,10 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
 
     useEffect(()=>{
       if(props.modal){
-        inputRefs[0].current?.focus();
+        refs[0].current?.focus(); 
       }
     },[props.modal])
+
     return (
         <div className={styles.main}
         style={props.modal ? {display: "flex"} : {display: "none"}}
@@ -99,15 +101,16 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
         <div className={styles.modalPasswordContainer}>
           <div className={styles.passwordTitle}>{title}</div>
           <div className={styles.passwordContainer}>
-            {inputRefs.map((ref, index) => (
-              <PasswordInput
+            {inputValues.map((value, index) => (
+               <input
                 key={index}
-                ref={ref}
-                onKeyUp={(event) => handleKeyUp(event, index)}
-                onChange={(event) => handleChange(event, index)}
-                value={inputValues[index]}
-                index={index}
-              />
+                ref={refs[index]}
+                value={value ? "*" : value}
+                onChange={handleChange(index)}
+                onKeyDown={handleBackspace(index)}
+                maxLength={1}
+                className={styles.passwordItem}
+                />
             ))}
           </div>
           <div className={styles.wrong}
