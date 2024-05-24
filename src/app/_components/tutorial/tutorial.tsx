@@ -33,7 +33,7 @@ export default function Tutorial(props:{modal:boolean, setModal:Dispatch<SetStat
                         <span className={`${styles.state} ${styles.complite}`}>
                             완
                         </span>  
-                        예약완료 라고 표시되며, 클릭하여 수정이 가능합니다.
+                        예약완료 라고 표시되며, 비밀번호 확인 후 수정이 가능합니다.
                     </div>
                     <div className={styles.content}>
                         공휴일, 주말 등 예약이 불가능한 날은 

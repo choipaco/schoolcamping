@@ -1,6 +1,7 @@
 import React, { ChangeEvent, Dispatch, KeyboardEvent, RefObject, SetStateAction, createRef, useEffect, useState } from 'react';
 import styles from './passwordModal.module.css';
 import { calendarLogin } from '@/app/_service/calendar';
+import { useAlert } from '@/app/_contexts/AlertContext';
 
 type pass = "create" | 'auth';
 export default function PasswordModal(props: { modal: boolean, setModal: Dispatch<SetStateAction<boolean>>, setPassword:Dispatch<SetStateAction<string>>,data:any, setData:Dispatch<SetStateAction<any>>, mode:pass, setUpdateModal:Dispatch<SetStateAction<boolean>>,setUpdateData:Dispatch<SetStateAction<any>>}) {
@@ -9,9 +10,8 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
     useEffect(() => {
       setRefs(Array(4).fill(null).map((_, i) => refs[i] || React.createRef<HTMLInputElement>()));
     }, [refs]);
-
+    const {addAlert} = useAlert();
     const [password, setPassword] = useState("");
-    const [passwordWrong, setPasswordWrong] = useState(false);
     const [title, setTitle] = useState('비밀번호 입력');
     const handleChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const nextValues = [...inputValues];
@@ -32,7 +32,6 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
     const handleOnClickBackground = () => {
         setInputValues(["", "", "", ""])
         setPassword("")
-        setPasswordWrong(false)
         props.setModal(false);
         props.setData("");
         setTitle("비밀번호 입력")
@@ -46,11 +45,12 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
           setInputValues(["", "", "", ""])
           props.setData('');
           setPassword("")
-          setPasswordWrong(false)
           props.setModal(false);
           setTitle("비밀번호 입력")
         }else{
-          setPasswordWrong(true);
+          setInputValues(["", "", "", ""])
+          refs[0].current?.focus(); 
+          addAlert("비밀번호가 일치하지 않습니다", false);
         }
       }
 
@@ -63,11 +63,12 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
                     props.setPassword(password);
                     setInputValues(["", "", "", ""])
                     setPassword("")
-                    setPasswordWrong(false)
                     setTitle("비밀번호 입력")
                     props.setModal(false);
                 }else{
-                    setPasswordWrong(true);
+                  setInputValues(["", "", "", ""])
+                  refs[0].current?.focus(); 
+                  addAlert("비밀번호가 일치하지 않습니다", false);
                 }
             }else{
               if(props.mode === "create"){
@@ -80,7 +81,6 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
               }
             }
         }else{
-          setPasswordWrong(false);
         }
     },[inputValues])
 
@@ -111,11 +111,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
                 />
             ))}
           </div>
-          <div className={styles.wrong}
-          style={passwordWrong ? {display: 'block'} : {display: 'none'}}
-          >
-            일치하지 않습니다
-          </div>
+
         </div>
       </div>
     </div>

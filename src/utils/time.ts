@@ -1,6 +1,8 @@
-export function getNextMonthYear(): string {
-    const today = new Date();
-    let nextMonth = today.getMonth() + 2;
+export function getNextMonthYear(day?:Date): string {
+
+
+    const today = new Date(day ? day : "");
+    let nextMonth = today.getMonth() + 1;
     let year = today.getFullYear();
   
     if (nextMonth > 12) {
@@ -217,4 +219,18 @@ export function formatDateRange(startDate: string, endDate: string): string {
   } else { // 시작 날짜와 종료 날짜가 다른 경우, 범위 반환
     return `${startFormatted}~${endFormatted}`;
   }
+}
+
+
+
+export function formatDateWithoutLeadingZeros(dateString:string) {
+  const date = new Date(dateString);
+  
+  // 연도, 월, 일을 추출합니다.
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+  const day = date.getDate();
+  
+  // 원하는 형식으로 반환합니다.
+  return `${year}.${month}.${day}`;
 }

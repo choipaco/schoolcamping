@@ -89,3 +89,16 @@ export async function updateCalendar(data:any) {
         return false;
     }
 }
+
+
+export async function getCalendar() {
+
+    
+    try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/calendar`, {
+        });
+        return res.data;
+    } catch (error:any) {
+        alert(error.response.data.message);
+    }
+}

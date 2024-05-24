@@ -4,8 +4,7 @@ import { AlertProvider } from "./_contexts/AlertContext";
 import { headers } from "next/headers";
 
 export const metadata: Metadata = {
-  title: "school camping",
-  description: "cloud & easy backend project build",
+  title: "스쿨캠핑",
   icons: {
     icon: "/assets/img/gbsw.ico"
   }

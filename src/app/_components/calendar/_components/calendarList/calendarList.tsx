@@ -8,20 +8,25 @@ interface Day{
     date?: string
 }
 
-export default function CalendarList(props:{date:Date, setData:Dispatch<SetStateAction<any>>, reload:boolean,  setReload:Dispatch<SetStateAction<boolean>>}){
+export default function CalendarList(props:{date?:Date, setData:Dispatch<SetStateAction<any>>, reload:boolean,  setReload:Dispatch<SetStateAction<boolean>>}){
     const [day,setDay] = useState<Day[]>()
     const getList = async() =>{
-        setDay(await getCalendarList(props.date.getFullYear(),props.date.getMonth()))
+        if(props.date){
+            setDay(await getCalendarList(props.date.getFullYear(),props.date.getMonth() + 1))
+        }
+        else{
+            props.setReload(true);
+        }
     }
     useEffect(() => {
         const fetchData = async () => {
             if(props.reload){
-                await getList();
                 props.setReload(false);
+                await getList();
             }
         };
         fetchData();
-    }, [props.reload, props.setReload]);
+    }, [props.reload, props.setReload,props.date]);
      
 
     const chunkArray = (size:number, array?:Day[]) => {

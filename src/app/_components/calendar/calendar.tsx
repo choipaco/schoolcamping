@@ -6,7 +6,7 @@ import Modal from './_components/modal/modal';
 import { useEffect, useState } from 'react';
 import PasswordModal from './_components/passwordModal/passwordModal';
 import { createClassroomData } from '@/utils/form';
-import { submitCalendar } from '@/app/_service/calendar';
+import { getCalendar, submitCalendar } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,9 +25,15 @@ export default function Calendar(){
     const [submit,setSubmit] = useState<any>();
     const [password,setPassword] = useState('');
     const [reload,setReload] = useState(true);
+    const [day, setDay] = useState<Date>();
 
-    const day = new Date();
-    day.setMonth(day.getMonth() + 2);
+    const getDay = async () =>{
+        setDay(new Date(String(await getCalendar())));
+    }
+
+    useEffect(()=>{
+        getDay();
+    },[])
 
     const submitCalendarInput = async() =>{
         const submits = await submitCalendar(createClassroomData(submit.boss,submit.inputs,submit.teacher,data.date,0,password))
@@ -78,7 +84,7 @@ export default function Calendar(){
             <div className={styles.calendarContainer}>
                 <div className={styles.calendarMonth}>
                     <div className={styles.month}>
-                        {getNextMonthYear()}
+                        {getNextMonthYear(day)}
                         <Image
                         className={styles.sonamu}
                         src="/assets/img/sonamu.svg"

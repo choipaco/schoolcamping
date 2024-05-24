@@ -3,10 +3,22 @@ import { useEffect, useState } from "react";
 import styles from "./sidebar.module.css";
 import Image from "next/image";
 import Tutorial from "../tutorial/tutorial";
+import { getCalendar } from "@/app/_service/calendar";
+import { formatDateWithoutLeadingZeros } from "@/utils/time";
   
 export default function Sidebar(){
    const [tool, setTool] = useState(['가위','전자렌지','수저','전기포트','불판','앞접시','집게','가스버너'])
    const [modal, setModal] = useState(false);
+   const [date, setDate] = useState('');
+
+   const getDay = async () =>{
+    setDate(await getCalendar());
+}
+
+useEffect(()=>{
+    getDay();
+},[])
+
    const modalOn = ()=>{
     setModal(true);
    }
@@ -53,7 +65,7 @@ export default function Sidebar(){
                         <div className={styles.itemContainer}>
                             <div className={styles.item}>
                                 <label className={styles.subTitle}>예약가능</label>
-                                <label className={`bluePoint ${styles.content} `}>{`2024.5.18`}까지</label>
+                                <label className={`bluePoint ${styles.content} `}>{formatDateWithoutLeadingZeros(date)}까지</label>
                             </div>
                             <div className={styles.item}>
                                 <label className={styles.subTitle}>예약주기</label>
