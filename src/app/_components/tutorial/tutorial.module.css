@@ -85,10 +85,11 @@
     .imposible{
         background-color: #C0C0C0;
     }
-.contentContainer{
-    margin-top: 20px;
-}
+    .contentContainer{
+        margin-top: 20px;
+    }
     .content{
         color: #ffffff;
         display: flex;
+        white-space: nowrap;
     }

@@ -33,7 +33,9 @@ export default function RootLayout({
       </AlertProvider>
       </body>
       :
-      <></>
+      <>
+      pc환경에서만 이용 가능합니다.
+      </>
       }
     </html>
   );

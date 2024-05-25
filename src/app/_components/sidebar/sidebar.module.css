@@ -126,3 +126,8 @@ color: #505050;
     margin-top: 40px;
     margin-bottom: 20px;
 }
+
+.numberColor{
+    color: rgb(216, 123, 104);
+    font-weight: bolder;
+}
