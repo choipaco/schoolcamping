@@ -1,5 +1,7 @@
 export function getNextMonthYear(day?:Date): string {
-
+  if(!day){
+    return "0000.00"
+  }
 
     const today = new Date(day ? day : "");
     let nextMonth = today.getMonth() + 1;
@@ -224,6 +226,9 @@ export function formatDateRange(startDate: string, endDate: string): string {
 
 
 export function formatDateWithoutLeadingZeros(dateString:string) {
+  if(!dateString){
+    return "0000.00.00"
+  }
   const date = new Date(dateString);
   
   // 연도, 월, 일을 추출합니다.

@@ -87,7 +87,7 @@
 }
 
 .itemContainer{
-    margin-top: 40px;
+    margin-top: 25px;
 }
 .item{
     margin-bottom: 20px;
@@ -130,4 +130,13 @@ color: #505050;
 .numberColor{
     color: rgb(216, 123, 104);
     font-weight: bolder;
+}
+
+.subText{
+    font-size: 12px;
+    color: #ff0000;
+}
+
+.meet{
+    margin-right: 1px;
 }

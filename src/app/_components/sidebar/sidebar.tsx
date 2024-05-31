@@ -4,10 +4,9 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
 import Tutorial from "../tutorial/tutorial";
 import { getCalendar } from "@/app/_service/calendar";
-import { formatDateWithoutLeadingZeros } from "@/utils/time";
   
 export default function Sidebar(){
-   const [tool, setTool] = useState(['가위','전자렌지','수저','전기포트','불판','앞접시','집게','가스버너'])
+   const [tool, setTool] = useState(['고기','음료수','쌈장','햇반','라면','채소','기타 등등'])
    const [modal, setModal] = useState(false);
    const [date, setDate] = useState('');
 
@@ -64,8 +63,10 @@ useEffect(()=>{
                         </label>
                         <div className={styles.itemContainer}>
                             <div className={styles.item}>
-                                <label className={styles.subTitle}>예약가능</label>
-                                <label className={`bluePoint ${styles.content} `}>{formatDateWithoutLeadingZeros(date)}까지</label>
+                                <label className={styles.subTitle}>예약가능기간</label>
+                                <label className={`bluePoint ${styles.content} `}>매월마지막주 목요일까지</label>
+                                <br/>
+                                <label className={styles.subText}>(시험, 자격증시험 등 학사일정에 따라 불가한 날이 있을수 있음)</label>
                             </div>
                             <div className={styles.item}>
                                 <label className={styles.subTitle}>예약주기</label>
@@ -84,13 +85,15 @@ useEffect(()=>{
 
                     <div className={styles.toolContainer}>
                         <label className={styles.title}>
-                            <Image
-                            src="/assets/img/hama.png"
-                            alt=""
-                            width={32}
-                            height={32}
-                            />
-                            시설/장비
+                            <label className={styles.meet}>
+                                <Image
+                                src="/assets/img/meet.png"
+                                alt=""
+                                width={30}
+                                height={32}
+                                />
+                            </label>
+                            준비물품
                         </label>
                         <div className={styles.itemContainer}>
                             {
