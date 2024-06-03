@@ -1,3 +1,4 @@
+import { getCalendar } from "@/app/_service/calendar";
 
 
 interface Student {
@@ -28,14 +29,14 @@ interface Student {
     return { studentId, studentName };
 }
   // 주어진 입력값들을 사용하여 Classroom 객체를 생성하는 함수
-  export function createClassroomData(
+  export async function createClassroomData(
     leaderInput: string,
     studentsInput: { value: string }[],
     teacherName: string,
     reservationDate: string,
     id?:number,
     password?: string
-  ): Classroom | false {
+  ){
     let leader: Student;
     let students: Student[] = [];
     const num = String(leaderInput.match(/\d+/g))
@@ -53,8 +54,8 @@ interface Student {
       students = studentsInput.map((item) => parseStudentInput(item.value));;
     }
   
-    const currentDate = new Date();
-    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(reservationDate));
+    const currentDate = new Date(await getCalendar());
+    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(reservationDate));
   
     const date = `${reservationDates.getFullYear()}-${
       reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1

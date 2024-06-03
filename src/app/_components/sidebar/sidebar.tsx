@@ -64,7 +64,10 @@ useEffect(()=>{
                         <div className={styles.itemContainer}>
                             <div className={styles.item}>
                                 <label className={styles.subTitle}>예약가능기간</label>
-                                <label className={`bluePoint ${styles.content} `}>매월마지막주 목요일까지</label>
+                                <label className={`bluePoint ${styles.content} `}>
+                                    {/* 매월마지막주 목요일까지 */}
+                                    6월 3일 12시까지
+                                </label>
                                 <br/>
                                 <label className={styles.subText}>(시험, 자격증시험 등 학사일정에 따라 불가한 날이 있을수 있음)</label>
                             </div>

@@ -30,7 +30,7 @@ export default function Item(props:{data:Data}){
             </td>
             <td className={styles.body}>
                 <select className={styles.selectStu}>
-                    <option className={styles.option}>신청자 {props.data.info?.reservationStudents.length}명</option>
+                    <option className={styles.option}>신청자 {Number(props.data.info?.reservationStudents.length) + 1}명</option>
                     {
                         props.data.info?.reservationStudents.map((it)=>{
                             return(

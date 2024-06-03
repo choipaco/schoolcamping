@@ -36,7 +36,7 @@ export default function Calendar(){
     },[])
 
     const submitCalendarInput = async() =>{
-        const submits = await submitCalendar(createClassroomData(submit.boss,submit.inputs,submit.teacher,data.date,0,password))
+        const submits = await submitCalendar(await createClassroomData(submit.boss,submit.inputs,submit.teacher,data.date,0,password))
         if(submits){
             addAlert("예약이 완료되었습니다.", true);
             setReload(true);

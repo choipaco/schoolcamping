@@ -14,7 +14,10 @@ export default function Modal(props:{modal:boolean,setModal:Dispatch<SetStateAct
     
     useEffect(()=>{
         if(props.data) {
-            setDay(getNextMonthDateFormatted(props.data.date));
+            const getDay = async()=>{
+                setDay(await getNextMonthDateFormatted(props.data.date));
+            }
+            getDay();
         }
     },[props.data])
     
