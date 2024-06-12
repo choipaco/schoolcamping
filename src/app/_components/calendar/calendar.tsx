@@ -28,7 +28,9 @@ export default function Calendar(){
     const [day, setDay] = useState<Date>();
 
     const getDay = async () =>{
-        setDay(new Date(String(await getCalendar())));
+        const date = new Date()
+        date.setMonth(date.getMonth() + 1);
+        setDay(date);
     }
 
     useEffect(()=>{

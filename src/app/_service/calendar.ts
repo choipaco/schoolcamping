@@ -99,6 +99,5 @@ export async function getCalendar() {
         });
         return res.data;
     } catch (error:any) {
-        alert(error.response.data.message);
     }
 }

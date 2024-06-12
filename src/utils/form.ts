@@ -54,8 +54,8 @@ interface Student {
       students = studentsInput.map((item) => parseStudentInput(item.value));;
     }
   
-    const currentDate = new Date(await getCalendar());
-    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(reservationDate));
+    const currentDate = new Date();
+    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(reservationDate));
   
     const date = `${reservationDates.getFullYear()}-${
       reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1

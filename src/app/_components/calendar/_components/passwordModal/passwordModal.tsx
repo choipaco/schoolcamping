@@ -9,7 +9,7 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
     const [refs, setRefs] = useState<RefObject<HTMLInputElement>[]>([]);
     useEffect(() => {
       setRefs(Array(4).fill(null).map((_, i) => refs[i] || React.createRef<HTMLInputElement>()));
-    }, [refs]);
+    }, []);
     const {addAlert} = useAlert();
     const [password, setPassword] = useState("");
     const [title, setTitle] = useState('비밀번호 입력');

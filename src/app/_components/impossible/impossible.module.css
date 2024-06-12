@@ -1,0 +1,64 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.background{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.536);
+}
+.modalContainer {
+    position: relative;
+    width: 45%;
+    aspect-ratio: 0.8 / 0.6; /* 1:1 비율 */
+    background-color: #FFFFFF;
+    border-radius: 8px;
+  }
+  
+
+
+.banImg{
+    width: 100%;
+    height: 40%;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textContainer{
+    margin-top: 20px;
+font-family: 'Inter';
+font-style: normal;
+
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+color: #0D1761;
+
+
+}
+
+.mainText{
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 51px;
+}
+
+.subText{
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 36px;
+}

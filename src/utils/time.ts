@@ -75,10 +75,10 @@ interface student{
 
 export const getNextMonthDateFormatted = async(inputDay: any) => {
     // 현재 날짜 객체 생성
-    const currentDate = new Date(await getCalendar());
+    const currentDate = new Date();
     // 다음 달의 inputDay로 날짜 객체 설정
     // getMonth() + 1을 하여 다음 달로 설정, setDate()로 일자 설정
-    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), Number(inputDay));
+    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(inputDay));
   
     // YYYY.MM.DD 형식으로 날짜 포맷
     const year = nextMonthDate.getFullYear();

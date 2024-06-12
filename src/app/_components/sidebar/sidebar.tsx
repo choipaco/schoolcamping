@@ -4,31 +4,55 @@ import styles from "./sidebar.module.css";
 import Image from "next/image";
 import Tutorial from "../tutorial/tutorial";
 import { getCalendar } from "@/app/_service/calendar";
-  
+import Impossible from "../impossible/impossible";
+  //{"isValidToday":false,"validLastDate":"2024-06-28"}
+
+  interface GetCalendars {
+    isValidToday: boolean,
+    validFirstDate: Date,
+    validLastDate: Date,
+    }
 export default function Sidebar(){
    const [tool, setTool] = useState(['고기','음료수','쌈장','햇반','라면','채소','기타 등등'])
    const [modal, setModal] = useState(false);
-   const [date, setDate] = useState('');
+   const [imposible, setImposible] = useState(false);
+   const [date, setDate] = useState<GetCalendars>();
 
    const getDay = async () =>{
-    setDate(await getCalendar());
+    const data = await getCalendar();
+    console.log(new Date(data.validLastDate))
+    setDate({
+        isValidToday: data.isValidToday,
+        validFirstDate: new Date(data.validFirstDate),
+        validLastDate: new Date(data.validLastDate)
+    });
 }
 
 useEffect(()=>{
     getDay();
 },[])
 
+
    const modalOn = ()=>{
     setModal(true);
    }
    useEffect(()=>{
-       const storgae = localStorage.getItem("modals") === "true";
+    if(!date) return;
+    
+    if(date){
+        setImposible(!date.isValidToday);
+    }
 
-       if(!storgae){
-        setModal(true);
-        localStorage.setItem("modals", JSON.stringify(true));
-       }
-   },[])
+    if(date.isValidToday){
+        const storgae = localStorage.getItem("modals") === "true";
+ 
+        if(!storgae){
+         setModal(true);
+         localStorage.setItem("modals", JSON.stringify(true));
+        }
+    }
+   },[date])
+
    return(
         <>
             <div className={styles.nav}>
@@ -49,6 +73,7 @@ useEffect(()=>{
                 </div>
             </div>
             <Tutorial modal={modal} setModal={setModal}/>
+            <Impossible modal={imposible} date={date?.validFirstDate}/>
             <div className={styles.main}>
                 <div className={styles.sidebarContainer}>
                     <div className={styles.inforContainer}>
@@ -65,8 +90,8 @@ useEffect(()=>{
                             <div className={styles.item}>
                                 <label className={styles.subTitle}>예약가능기간</label>
                                 <label className={`bluePoint ${styles.content} `}>
-                                    {/* 매월마지막주 목요일까지 */}
-                                    6월 3일 12시까지
+                                    {/* 매월 마지막주 목요일까지 */}
+                                    {date ? (Number(date.validLastDate.getMonth()) + 1) + `월 ` + date.validLastDate.getDate() + `일 자정까지` : ""}
                                 </label>
                                 <br/>
                                 <label className={styles.subText}>(시험, 자격증시험 등 학사일정에 따라 불가한 날이 있을수 있음)</label>

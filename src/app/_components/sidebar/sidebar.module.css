@@ -64,18 +64,19 @@
 }
 .inforContainer{
     width: 100%;
-    height: 250px;
+    height: 230px;
     border-bottom: 1px solid #C0C0C0;
+    padding-bottom: 20px;
 }
 .toolContainer{
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
-    height: 100px;
+    height: 70px;
     padding-bottom: 30px;
     border-bottom: 1px solid #C0C0C0;
 }
 .ruleContainer{
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     height: 100%;
 }
@@ -87,7 +88,7 @@
 }
 
 .itemContainer{
-    margin-top: 25px;
+    margin-top: 15px;
 }
 .item{
     margin-bottom: 20px;
