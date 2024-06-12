@@ -69,7 +69,9 @@ export async function calendarLogin(password: string,reservationId:number) {
                 'Content-Type': 'application/json'
             }   
         });
-
+        if(res.status === 429){
+            return '429';
+        }
         return res.data;
     } catch (error:any) {
         return false;

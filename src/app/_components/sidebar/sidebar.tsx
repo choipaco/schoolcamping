@@ -22,7 +22,7 @@ export default function Sidebar(){
     const data = await getCalendar();
     console.log(new Date(data.validLastDate))
     setDate({
-        isValidToday: data.isValidToday,
+        isValidToday: !data.isValidToday,
         validFirstDate: new Date(data.validFirstDate),
         validLastDate: new Date(data.validLastDate)
     });

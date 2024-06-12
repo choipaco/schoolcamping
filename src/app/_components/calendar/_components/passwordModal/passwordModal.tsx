@@ -38,7 +38,12 @@ export default function PasswordModal(props: { modal: boolean, setModal: Dispatc
       }
       const handleOnChangePasswordChk = async() =>{
         const res = await calendarLogin(inputValues[0]+inputValues[1]+inputValues[2]+inputValues[3],props.data.id);
-        
+        if(res === '429'){
+          setInputValues(["", "", "", ""])
+          refs[0].current?.focus(); 
+          addAlert("잠시 후 시도해주세요", false);
+          return;
+        }
         if(res){
           props.setUpdateData({...res, password: inputValues[0]+inputValues[1]+inputValues[2]+inputValues[3]});
           props.setUpdateModal(true);

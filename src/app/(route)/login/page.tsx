@@ -21,7 +21,10 @@ export default function Home() {
     e.preventDefault();
     if(!pw) return addAlert('비밀번호를 입력해주세요',false);
     const status = await loginApi(pw);
-
+    if(status === '429'){
+      addAlert("잠시 후 시도해주세요", false);
+      return;
+    }
     if(status){
       addAlert('로그인 완료', true);  
       setCookie('login',status,{path: '/'})
