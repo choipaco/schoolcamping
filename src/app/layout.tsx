@@ -4,9 +4,15 @@ import { AlertProvider } from "./_contexts/AlertContext";
 import { headers } from "next/headers";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://camping.gbsw.hs.kr'),
   title: "스쿨캠핑",
+  description: "스쿨캠핑 예약사이트 입니다",
   icons: {
     icon: "/assets/img/gbsw.ico"
+  },
+  openGraph: {
+    images: new URL("https://cdn-icons-png.flaticon.com/512/1600/1600667.png"),
+    type: "website"
   }
 };
 
