@@ -8,10 +8,12 @@ export const metadata: Metadata = {
   title: "스쿨캠핑",
   description: "스쿨캠핑 예약사이트 입니다",
   icons: {
-    icon: "/assets/img/gbsw.ico"
+    icon: "/assets/img/camping.jpg"
   },
   openGraph: {
-    images: new URL("https://cdn-icons-png.flaticon.com/512/1600/1600667.png"),
+    title: "스쿨캠핑",
+    description: "스쿨캠핑 예약사이트 입니다",
+    images: "/assets/img/camping.jpg",
     type: "website"
   }
 };
