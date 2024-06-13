@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "스쿨캠핑",
   description: "스쿨캠핑 예약사이트 입니다",
   icons: {
-    icon: "/assets/img/camping.png"
+    icon: "/assets/img/favico.png"
   },
   openGraph: {
     title: "스쿨캠핑",
