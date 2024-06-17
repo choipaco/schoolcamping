@@ -82,7 +82,7 @@ export const getNextMonthDateFormatted = async(inputDay: any) => {
   
     // YYYY.MM.DD 형식으로 날짜 포맷
     const year = nextMonthDate.getFullYear();
-    const month = nextMonthDate.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+    const month = nextMonthDate.getMonth() + 1; // +1 다음달
     const day = nextMonthDate.getDate();
   
     const formattedDate = `${year}.${month.toString().padStart(2, '0')}.${day.toString().padStart(2, '0')}`;
@@ -117,7 +117,7 @@ export const getMonthDateFormatted = (date:Date) =>{
 }
 export const getYearAndMonth = (): { year: number; month: number } => {
     const currentDate = new Date();
-    let nextMonth = currentDate.getMonth() + 1;
+    let nextMonth = currentDate.getMonth(); // admin 월조정
     let year = currentDate.getFullYear();
 
     if (nextMonth > 11) {
