@@ -29,7 +29,7 @@ export default function Calendar(){
 
     const getDay = async () =>{
         const date = new Date()
-        date.setMonth(date.getMonth() + 1); // +1 다음달
+        date.setMonth(date.getMonth() + 1);
         setDay(date);
     }
 
