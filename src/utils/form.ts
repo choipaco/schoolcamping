@@ -60,7 +60,14 @@ interface Student {
     const date = `${reservationDates.getFullYear()}-${
       reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1
     }-${reservationDates.getDate() < 10 ? '0' + reservationDates.getDate() : reservationDates.getDate()}`;
-    
+    // console.log({
+    //   id: id ? id : 0,
+    //   leader,
+    //   students,
+    //   teacherName,
+    //   reservationDate: date,
+    //   password: password ? password : "",
+    // })
     return {
       id: id ? id : 0,
       leader,
