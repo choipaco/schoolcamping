@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AlertProvider } from "./_contexts/AlertContext"; 
 import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://camping.gbsw.hs.kr'),
@@ -16,17 +15,8 @@ export const metadata: Metadata = {
     description: "스쿨캠핑 예약사이트 입니다",
     images: "/assets/img/camping.jpg",
     type: "website"
-  },
-  
-  
+  }
 };
-export function middleware(request: NextRequest) {
-  return NextResponse.next({
-    headers: {
-      'Cache-Control': 'no-store',
-    },
-  });
-}
 
 
 export default function RootLayout({
