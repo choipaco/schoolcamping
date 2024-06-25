@@ -2,14 +2,16 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from './modal.module.css'
 import { getNextMonthDateFormatted } from '@/utils/time';
-import { validateStudent } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
 import { updateCalendarAdmin } from '@/app/_service/admin';
-import { createClassroomData } from '@/utils/form';
-
+import { createClassroomDataAdmin } from '@/utils/form';
+interface date{
+    year: number
+    month: number
+}
 type miniChoice = 'update' | 'delete' | 'none';
-export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>, data:any, setData:Dispatch<SetStateAction<any>>, miniChoice:miniChoice, setMiniChoice:Dispatch<SetStateAction<miniChoice>>}) {
+export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>, data:any, setData:Dispatch<SetStateAction<any>>,date:date, miniChoice:miniChoice, setMiniChoice:Dispatch<SetStateAction<miniChoice>>}) {
     const { addAlert } = useAlert();
     const [boss,setBoss] = useState(props.data.info.leaderId + props.data.info.leaderName);
     const [teacher,setTeacher] = useState(props.data.info.teacherName);
@@ -24,7 +26,7 @@ export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>
     },[])
     useEffect(()=>{
         if(props.data) {
-            setDay(getNextMonthDateFormatted(props.data.date));
+            setDay(getNextMonthDateFormatted(props.data.date, props.date));
         }
     },[props.data])
     
@@ -65,7 +67,7 @@ export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>
         if(!teacher) return addAlert("선생님 성함을 입력해주세요",false);
         if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
 
-        const res = await updateCalendarAdmin(await createClassroomData(boss,inputs,teacher,props.data.date,props.data.info.id));
+        const res = await updateCalendarAdmin(await createClassroomDataAdmin(boss,inputs,teacher,props.date,props.data.date,props.data.info.id));
         if(res){
             addAlert("수정완료",true);
             props.setReload(true);

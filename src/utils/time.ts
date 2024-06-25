@@ -71,14 +71,17 @@ interface student{
     return processedDates;
 }
 
+interface date{
+  year: number
+  month: number
+}
 
-
-export const getNextMonthDateFormatted = async(inputDay: any) => {
+export const getNextMonthDateFormatted = (inputDay: any,date:date) => {
     // 현재 날짜 객체 생성
     const currentDate = new Date();
     // 다음 달의 inputDay로 날짜 객체 설정
     // getMonth() + 1을 하여 다음 달로 설정, setDate()로 일자 설정
-    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(inputDay));
+    const nextMonthDate = new Date(currentDate.getFullYear(), date.month - 1, Number(inputDay));
   
     // YYYY.MM.DD 형식으로 날짜 포맷
     const year = nextMonthDate.getFullYear();

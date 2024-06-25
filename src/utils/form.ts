@@ -28,6 +28,59 @@ interface Student {
     }
     return { studentId, studentName };
 }
+interface date{
+    year: number
+    month: number
+}
+export async function createClassroomDataAdmin(
+  leaderInput: string,
+  studentsInput: { value: string }[],
+  teacherName: string,
+  dates:date,
+  reservationDate: string,
+  id?:number,
+  password?: string
+){
+  let leader: Student;
+  let students: Student[] = [];
+  const num = String(leaderInput.match(/\d+/g))
+  if(num.length !== 4 || num === 'null'){
+    return false;
+  }else{
+    leader = parseStudentInput(leaderInput);
+  }
+  for (const item of studentsInput) {
+    const num = String(item.value.match(/\d+/g))
+    if (num.length !== 4 || num === 'null') {
+      
+      return false;
+    }
+    students = studentsInput.map((item) => parseStudentInput(item.value));;
+  }
+
+  const currentDate = new Date();
+  const reservationDates = new Date(currentDate.getFullYear(), dates.month - 1, Number(reservationDate)); // +1 다음달
+
+  const date = `${reservationDates.getFullYear()}-${
+    reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1
+  }-${reservationDates.getDate() < 10 ? '0' + reservationDates.getDate() : reservationDates.getDate()}`;
+  // console.log({
+  //   id: id ? id : 0,
+  //   leader,
+  //   students,
+  //   teacherName,
+  //   reservationDate: date,
+  //   password: password ? password : "",
+  // })
+  return {
+    id: id ? id : 0,
+    leader,
+    students,
+    teacherName,
+    reservationDate: date,
+    password: password ? password : "",
+  };
+}
   // 주어진 입력값들을 사용하여 Classroom 객체를 생성하는 함수
   export async function createClassroomData(
     leaderInput: string,

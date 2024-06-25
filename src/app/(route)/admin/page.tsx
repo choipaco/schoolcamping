@@ -51,7 +51,7 @@ export default function Home() {
           ""
           :
           miniChoice === "update" ?
-          <Modal key={''} setReload={setReload} setData={setData} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice}/>
+          <Modal key={''} setReload={setReload} setData={setData} data={data} date={date} miniChoice={miniChoice} setMiniChoice={setMiniChoice}/>
           :
           miniChoice === "delete" ?
           <DeleteModal key={''} date={date} data={data} miniChoice={miniChoice} setMiniChoice={setMiniChoice} setReload={setReload}/>
