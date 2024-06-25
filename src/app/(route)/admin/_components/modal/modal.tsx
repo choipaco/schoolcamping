@@ -1,7 +1,7 @@
 'use client'
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from './modal.module.css'
-import { getNextMonthDateFormatted } from '@/utils/time';
+import { getNextMonthDateFormattedAdmin } from '@/utils/time';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
 import { updateCalendarAdmin } from '@/app/_service/admin';
@@ -26,7 +26,7 @@ export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>
     },[])
     useEffect(()=>{
         if(props.data) {
-            setDay(getNextMonthDateFormatted(props.data.date, props.date));
+            setDay(getNextMonthDateFormattedAdmin(props.data.date, props.date));
         }
     },[props.data])
     

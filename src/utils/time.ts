@@ -76,12 +76,33 @@ interface date{
   month: number
 }
 
-export const getNextMonthDateFormatted = (inputDay: any,date:date) => {
+export const getNextMonthDateFormattedAdmin = (inputDay: any,date:date) => {
+  // 현재 날짜 객체 생성
+  const currentDate = new Date();
+  // 다음 달의 inputDay로 날짜 객체 설정
+  // getMonth() + 1을 하여 다음 달로 설정, setDate()로 일자 설정
+  const nextMonthDate = new Date(currentDate.getFullYear(), date.month - 1, Number(inputDay));
+
+  // YYYY.MM.DD 형식으로 날짜 포맷
+  const year = nextMonthDate.getFullYear();
+  const month = nextMonthDate.getMonth() + 1; // +1 다음달
+  const day = nextMonthDate.getDate();
+
+  const formattedDate = `${year}.${month.toString().padStart(2, '0')}.${day.toString().padStart(2, '0')}`;
+
+  // 요일 계산 (0:일요일, 1:월요일, ..., 6:토요일)
+  const dayOfWeek = nextMonthDate.getDay();
+  const dayOfWeekStr = ["일", "월", "화", "수", "목", "금", "토"][dayOfWeek];
+
+  // 최종 문자열 반환
+  return `${formattedDate}(${dayOfWeekStr})`;
+}
+export const getNextMonthDateFormatted = (inputDay: any) => {
     // 현재 날짜 객체 생성
     const currentDate = new Date();
     // 다음 달의 inputDay로 날짜 객체 설정
     // getMonth() + 1을 하여 다음 달로 설정, setDate()로 일자 설정
-    const nextMonthDate = new Date(currentDate.getFullYear(), date.month - 1, Number(inputDay));
+    const nextMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, Number(inputDay));
   
     // YYYY.MM.DD 형식으로 날짜 포맷
     const year = nextMonthDate.getFullYear();
