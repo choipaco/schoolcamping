@@ -179,17 +179,22 @@ export async function createClassroomDataAdmin(
     }
 
     const filteredInputs = studentsInput.filter(item => {
-      // input이 비어있지 않고, 숫자 4자리로 시작하는지 확인
-      return item.value.trim().length === 4;
+      const num = String(item.value.match(/\d+/g))
+      if(num.length !== 4 || num === 'null'){
+        return false;
+      }
+      return item.value;
     });
+
+    if(filteredInputs.length !== studentsInput.length) return false;
+
     students = filteredInputs.map((item) => parseStudentInput(item.value));;
     students.push(leader);
-
+    
     const currentDate = new Date();
     const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(reservationDate));
     
     const date = `${reservationDates.getFullYear()}-${reservationDates.getMonth()+1 < 10 ? '0'+ (reservationDates.getMonth()+1) : reservationDates.getMonth()+1}-${reservationDates.getDate() < 10 ? '0'+reservationDates.getDate() : reservationDates.getDate()}`;
-
     return {
       studentsInfo: students,
       date
