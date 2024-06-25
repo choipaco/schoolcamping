@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     description: "스쿨캠핑 예약사이트 입니다",
     images: "/assets/img/camping.jpg",
     type: "website"
-  }
+  },
+  
 };
 
 export default function RootLayout({
