@@ -65,7 +65,7 @@ export default function Modal(props:{setReload:Dispatch<SetStateAction<boolean>>
         if(!teacher) return addAlert("선생님 성함을 입력해주세요",false);
         if(!inputs[0].value) return addAlert('참가자를 한명이라도 입력해주세요',false);
 
-        const res = await updateCalendarAdmin(createClassroomData(boss,inputs,teacher,props.data.date,props.data.info.id));
+        const res = await updateCalendarAdmin(await createClassroomData(boss,inputs,teacher,props.data.date,props.data.info.id));
         if(res){
             addAlert("수정완료",true);
             props.setReload(true);

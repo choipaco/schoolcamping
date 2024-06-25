@@ -27,10 +27,10 @@ export const getBlackList = async() =>{
 
 
 export async function updateCalendarAdmin(data:any) {
-    let datas:any;
-    await data.then((data:any) => datas = data);
+    // let datas:any;
+    // await data.then((data:any) => datas = data);
     try {
-        await axiosInstance.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation`, datas, {
+        await axiosInstance.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
