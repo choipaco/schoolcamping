@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AlertProvider } from "./_contexts/AlertContext"; 
 import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://camping.gbsw.hs.kr'),
@@ -17,7 +18,16 @@ export const metadata: Metadata = {
     type: "website"
   },
   
+  
 };
+export function middleware(request: NextRequest) {
+  return NextResponse.next({
+    headers: {
+      'Cache-Control': 'no-store',
+    },
+  });
+}
+
 
 export default function RootLayout({
   children,
@@ -28,7 +38,6 @@ export default function RootLayout({
   const headersList = headers();
   const userAgent = headersList.get('user-agent');
 
-  // 
   let isMobileView = userAgent!.match(
     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
   );
@@ -49,3 +58,4 @@ export default function RootLayout({
     </html>
   );
 }
+
