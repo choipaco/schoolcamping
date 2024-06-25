@@ -6,18 +6,8 @@ const nextConfig = {
     //         fullUrl: true,
     //     }
     // },
-    headers: async () => {
-      return [
-        {
-          source: '/:path*',
-          headers: [
-            {
-              key: 'Cache-Control',
-              value: 'no-store',
-            },
-          ],
-        },
-      ];
+    headers: {
+        'Cache-Control': 'no-store'
     },
   };
   
