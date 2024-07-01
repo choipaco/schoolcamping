@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AlertProvider } from "./_contexts/AlertContext"; 
 import { headers } from "next/headers";
+import ServiceWorkerRegistration from "./_components/ServiceWorkerRegistration/ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://camping.gbsw.hs.kr'),
@@ -37,6 +38,7 @@ export default function RootLayout({
         !isMobileView ?
       <body>
       <AlertProvider>
+      <ServiceWorkerRegistration />
         {children}
       </AlertProvider>
       </body>
