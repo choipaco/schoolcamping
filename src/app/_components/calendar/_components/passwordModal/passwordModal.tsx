@@ -3,9 +3,8 @@ import styles from './passwordModal.module.css';
 import { calendarLogin } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
 
-type pass = "create" | 'auth';
 export default function PasswordModal(props: { modal: boolean, setModal: Dispatch<SetStateAction<boolean>>, setPassword:Dispatch<SetStateAction<string>>,data:any, setData:Dispatch<SetStateAction<any>>, mode:pass, setUpdateModal:Dispatch<SetStateAction<boolean>>,setUpdateData:Dispatch<SetStateAction<any>>}) {
-    const [inputValues, setInputValues] = useState(Array(4).fill('')); // 입력 값 배열 상태 생성
+    const [inputValues, setInputValues] = useState(Array(4).fill('')); 
     const [refs, setRefs] = useState<RefObject<HTMLInputElement>[]>([]);
     useEffect(() => {
       setRefs(Array(4).fill(null).map((_, i) => refs[i] || React.createRef<HTMLInputElement>()));

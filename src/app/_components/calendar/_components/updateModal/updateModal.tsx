@@ -1,12 +1,11 @@
 'use client'
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from './updateModal.module.css'
-import { getMonthDateFormatted, getNextMonthDateFormatted } from '@/utils/time';
-import { updateCalendar, validateStudent } from '@/app/_service/calendar';
+import { getMonthDateFormatted } from '@/utils/time';
+import { updateCalendar } from '@/app/_service/calendar';
 import { useAlert } from '@/app/_contexts/AlertContext';
 import Image from 'next/image';
-import { updateCalendarAdmin } from '@/app/_service/admin';
-import { createClassroomData, updateClassroomData } from '@/utils/form';
+import { updateClassroomData } from '@/utils/form';
 
 export default function UpdateModal(props:{modal:boolean,setModal:Dispatch<SetStateAction<boolean>>,setReload:Dispatch<SetStateAction<boolean>>, data:any, setData:Dispatch<SetStateAction<any>>}) {
     const { addAlert } = useAlert();

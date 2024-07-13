@@ -12,7 +12,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UpdateModal from './_components/updateModal/updateModal';
 
-type pass = "create" | 'auth';
 
 export default function Calendar(){
     const { addAlert } = useAlert();
@@ -26,7 +25,15 @@ export default function Calendar(){
     const [password,setPassword] = useState('');
     const [reload,setReload] = useState(true);
     const [day, setDay] = useState<Date>();
-
+    const [permit, setPermit] = useState<GetCalendars>();
+    const getPermit = async () =>{
+        const data = await getCalendar();
+        setPermit({
+            isValidToday: data.isValidToday,
+            validFirstDate: new Date(data.validFirstDate),
+            validLastDate: new Date(data.validLastDate)
+        });
+    }
     const getDay = async () =>{
         const date = new Date()
         date.setMonth(date.getMonth() + 1); // +1 다음달
@@ -35,6 +42,7 @@ export default function Calendar(){
 
     useEffect(()=>{
         getDay();
+        getPermit();
     },[])
 
     const submitCalendarInput = async() =>{
@@ -97,7 +105,7 @@ export default function Calendar(){
                     </div>
                 </div>
                 <div className={styles.calendarItem}>
-                    <CalendarList date={day} setData={setData} reload={reload} setReload={setReload}/>
+                    <CalendarList date={day} setData={setData} reload={reload} setReload={setReload} permit={permit!}/>
                     <Modal modal={modal} setModal={setModal} data={data} setSubmit={setSubmit} setData={setData}/>
                     <UpdateModal modal={updateModal} setModal={setUpdateModal} data={updateData} setData={setUpdateData} setReload={setReload}/>
                     <PasswordModal modal={passwordModal} setModal={setPasswordModal} setPassword={setPassword} data={data} setData={setData} mode={passwordMode} setUpdateModal={setUpdateModal} setUpdateData={setUpdateData}/>

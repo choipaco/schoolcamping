@@ -1,14 +1,11 @@
 'use client'
-import { processDates } from "@/utils/time";
 import styles from "./calendarList.module.css";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import getCalendarList from "@/app/_service/calendar";
 import CalendarItem from "../calendarItem/calendarItem";
-interface Day{
-    date?: string
-}
 
-export default function CalendarList(props:{date?:Date, setData:Dispatch<SetStateAction<any>>, reload:boolean,  setReload:Dispatch<SetStateAction<boolean>>}){
+
+export default function CalendarList(props:{date?:Date, setData:Dispatch<SetStateAction<any>>, reload:boolean,  setReload:Dispatch<SetStateAction<boolean>>, permit:GetCalendars}){
     const [day,setDay] = useState<Day[]>()
     const getList = async() =>{
         if(props.date){
@@ -60,7 +57,7 @@ export default function CalendarList(props:{date?:Date, setData:Dispatch<SetStat
                             <td key={index} className={styles.body}>
                                 {
                                     day.date ?
-                                    <CalendarItem day={day} setData={props.setData}/>
+                                    <CalendarItem day={day} setData={props.setData} permit={props.permit?.isValidToday}/>
                                     :
                                     <></>
                                 }

@@ -7,25 +7,21 @@ import { getCalendar } from "@/app/_service/calendar";
 import Impossible from "../impossible/impossible";
   //{"isValidToday":false,"validLastDate":"2024-06-28"}
 
-  interface GetCalendars {
-    isValidToday: boolean,
-    validFirstDate: Date,
-    validLastDate: Date,
-    }
+
 export default function Sidebar(){
    const [tool, setTool] = useState(['고기','음료수','쌈장','햇반','라면','채소','기타 등등'])
    const [modal, setModal] = useState(false);
    const [imposible, setImposible] = useState(false);
    const [date, setDate] = useState<GetCalendars>();
 
-   const getDay = async () =>{
-    const data = await getCalendar();
-    setDate({
-        isValidToday: data.isValidToday,
-        validFirstDate: new Date(data.validFirstDate),
-        validLastDate: new Date(data.validLastDate)
-    });
-}
+    const getDay = async () =>{
+        const data = await getCalendar();
+        setDate({
+            isValidToday: data.isValidToday,
+            validFirstDate: new Date(data.validFirstDate),
+            validLastDate: new Date(data.validLastDate)
+        });
+    }
 
 useEffect(()=>{
     getDay();

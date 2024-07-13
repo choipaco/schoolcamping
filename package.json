@@ -17,6 +17,7 @@
     "react-cookie": "^7.1.4",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18",
+    "recoil": "^0.7.7",
     "swr": "^2.2.4",
     "ua-parser-js": "^1.0.37"
   },

@@ -2,24 +2,23 @@ import { Dispatch, SetStateAction } from 'react';
 import styles from './calendarItem.module.css'
 import { useAlert } from '@/app/_contexts/AlertContext';
 
-interface Day{
-    date?: string;
-    status?: string
-    info?: any
-}
-export default function CalendarItem(props:{day:Day, setData:Dispatch<SetStateAction<any>>}){
+
+export default function CalendarItem(props:{day:Dates, setData:Dispatch<SetStateAction<any>>, permit:boolean}){
     const { addAlert } = useAlert();
     const handleOnClick = () => {
-        props.setData(props.day);
-        if(props.day.status === "예약 불가능"){
-            addAlert("예약이 불가능한 날입니다", false);
+        if(!props.permit){
+            return addAlert("예약 진행 기간이 아닙니다", false);
         }
+        if(props.day.status === "예약 불가능"){
+            return addAlert("예약이 불가능한 날입니다", false);
+        }
+        props.setData(props.day);
     }
     return(
         <div className={styles.main} onClick={handleOnClick}>
             {props.day.date}
             <div className={styles.container}>
-                <div className={`${styles.state} 
+                <div className={`${styles.state}
                 ${
                     props.day.status?
                     props.day.status === "예약 가능" ?
