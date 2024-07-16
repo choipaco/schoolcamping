@@ -6,7 +6,7 @@ export function getNextMonthYear(day?:Date): string {
   }
 
     const today = new Date(day ? day : "");
-    let nextMonth = today.getMonth() + 1;
+    let nextMonth = today.getMonth() +  Number(process.env.NEXT_PUBLIC_DAY_NUMBER);
     let year = today.getFullYear();
   
     if (nextMonth > 12) {

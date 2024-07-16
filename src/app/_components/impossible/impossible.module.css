@@ -51,6 +51,8 @@ color: #0D1761;
 }
 
 .mainText{
+    width: 100%;
+    text-align: center;
     font-weight: 700;
     font-size: 35px;
     line-height: 51px;

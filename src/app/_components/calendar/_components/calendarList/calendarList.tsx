@@ -9,7 +9,7 @@ export default function CalendarList(props:{date?:Date, setData:Dispatch<SetStat
     const [day,setDay] = useState<Day[]>()
     const getList = async() =>{
         if(props.date){
-            setDay(await getCalendarList(props.date.getFullYear(),props.date.getMonth() + 1))
+            setDay(await getCalendarList(props.date.getFullYear(),props.date.getMonth() + Number(process.env.NEXT_PUBLIC_DAY_NUMBER)))
         }
         else{
             props.setReload(true);

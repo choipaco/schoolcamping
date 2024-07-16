@@ -3,7 +3,6 @@ import "./globals.css";
 import { AlertProvider } from "./_contexts/AlertContext"; 
 import { headers } from "next/headers";
 import ServiceWorkerRegistration from "./_components/ServiceWorkerRegistration/ServiceWorkerRegistration";
-import RecoilRootWrapper from "./_contexts/RecoilWrapper";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://camping.gbsw.hs.kr'),
@@ -40,9 +39,7 @@ export default function RootLayout({
       <body>
       <AlertProvider>
         <ServiceWorkerRegistration />
-        <RecoilRootWrapper>
           {children}
-        </RecoilRootWrapper>
       </AlertProvider>
       </body>
       :

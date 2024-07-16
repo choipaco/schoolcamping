@@ -59,7 +59,7 @@ export async function createClassroomDataAdmin(
   }
 
   const currentDate = new Date();
-  const reservationDates = new Date(currentDate.getFullYear(), dates.month - 1, Number(reservationDate)); // +1 다음달
+  const reservationDates = new Date(currentDate.getFullYear(), dates.month - (2 -  Number(process.env.NEXT_PUBLIC_DAY_NUMBER)), Number(reservationDate)); // +1 다음달
 
   const date = `${reservationDates.getFullYear()}-${
     reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1
@@ -108,7 +108,7 @@ export async function createClassroomDataAdmin(
     }
   
     const currentDate = new Date();
-    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, Number(reservationDate)); // +1 다음달
+    const reservationDates = new Date(currentDate.getFullYear(), currentDate.getMonth() +  Number(process.env.NEXT_PUBLIC_DAY_NUMBER), Number(reservationDate)); // +1 다음달
   
     const date = `${reservationDates.getFullYear()}-${
       reservationDates.getMonth() + 1 < 10 ? '0' + (reservationDates.getMonth() + 1) : reservationDates.getMonth() + 1

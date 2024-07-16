@@ -6,7 +6,7 @@ export default async function getCalendarList(year:number, month:number) {
 
     
     try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/calendar/${year}/${month}`, {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/calendar/${year}/${month}`, {
         });
         return processDates(year,month,res.data); 
     } catch (error:any) {
@@ -18,7 +18,7 @@ export default async function getCalendarList(year:number, month:number) {
 export async function submitCalendar(data:any) {
 
     try {
-        await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping`, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/camping`, {
             leader: data.leader,
             password: data.password,
             reservationDate: data.reservationDate,
@@ -41,7 +41,7 @@ export async function validateStudent(leaderInput:string, studentsInput: { value
     const data = validate(leaderInput,studentsInput,reservationDate)
     if(!data) return false;
     try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping/validate/student`, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/camping/validate/student`, {
             studentsInfo: data.studentsInfo,
             date: data.date
         }, {
@@ -61,7 +61,7 @@ export async function validateStudent(leaderInput:string, studentsInput: { value
 
 export async function calendarLogin(password: string,reservationId:number) {
     try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/auth/login/reservation`, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/auth/login/reservation`, {
             reservationId,
             password
         }, {
@@ -80,7 +80,7 @@ export async function calendarLogin(password: string,reservationId:number) {
 
 export async function updateCalendar(data:any) {
     try {
-        await axios.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/camping`,data, {
+        await axios.put(`${process.env.NEXT_PUBLIC_API_LINK}/api/camping`,data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -97,7 +97,7 @@ export async function getCalendar() {
 
     
     try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/calendar`, {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/calendar`, {
         });
         return res.data;
     } catch (error:any) {

@@ -7,7 +7,7 @@ import axios from "axios";
 export default async function getCalendarListAdmin(year:number, month:number) {
 
     try {
-        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/${year}/${month}`, {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation/${year}/${month}`, {
         });
         return processDates(year,month,res.data); 
     } catch (error:any) {
@@ -17,7 +17,7 @@ export default async function getCalendarListAdmin(year:number, month:number) {
 
 export const getBlackList = async() =>{
     try {
-        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/blacklist`, {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/blacklist`, {
         });
         return res.data; 
     } catch (error:any) {
@@ -27,10 +27,8 @@ export const getBlackList = async() =>{
 
 
 export async function updateCalendarAdmin(data:any) {
-    // let datas:any;
-    // await data.then((data:any) => datas = data);
     try {
-        await axiosInstance.put(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation`, data, {
+        await axiosInstance.put(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -48,7 +46,7 @@ export async function addBlackList(stu:string,reason:string) {
     const {studentId, studentName} = parseStudentInput(stu);
 
     try {
-        await axiosInstance.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/blacklist`, {
+        await axiosInstance.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/blacklist`, {
             studentId,
             studentName,
             reason,
@@ -69,7 +67,7 @@ export async function addBlackList(stu:string,reason:string) {
 export async function deleteBlackList(studentId:string) {
 
     try {
-        await axiosInstance.delete(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/blacklist`, {
+        await axiosInstance.delete(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/blacklist`, {
             data:{
                 studentId
             }
@@ -85,7 +83,7 @@ export async function deleteBlackList(studentId:string) {
 export async function banDate(year:number, month:number, startDate:number, endDate:number, reason:string) {
     const data = createDatesArray(year,month,startDate,endDate,reason)
     try {
-        await axiosInstance.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/disable`, data, {
+        await axiosInstance.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation/disable`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -98,7 +96,7 @@ export async function banDate(year:number, month:number, startDate:number, endDa
 }
 export async function banDateList(year:number, month:number) {
     try {
-        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/disable/${year}/${month}`, {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation/disable/${year}/${month}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -113,7 +111,7 @@ export async function banDateList(year:number, month:number) {
 export async function banDateDelete(startDate:string,endDate:string){
     const data = getDatesInRange(startDate,endDate);
     try {
-        await axiosInstance.post(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/enable`, data, {
+        await axiosInstance.post(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation/enable`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -127,7 +125,7 @@ export async function banDateDelete(startDate:string,endDate:string){
 
 export async function getExecl(year:number,month:number) {
     try {
-        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/excel/${year}/${month}`, {
+        const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/excel/${year}/${month}`, {
             responseType: 'blob'
         });
         return res.data
@@ -139,7 +137,7 @@ export async function getExecl(year:number,month:number) {
 
 export async function deleteCalendar(id:number) {
     try {
-        await axiosInstance.delete(`${process.env.NEXT_PUBLIC_DB_LINK}/api/admin/reservation/${id}`, {});
+        await axiosInstance.delete(`${process.env.NEXT_PUBLIC_API_LINK}/api/admin/reservation/${id}`, {});
         return true;
     } catch (error:any) {
         return false;

@@ -5,7 +5,7 @@ export default function Impossible(props:{modal:boolean, date?:Date}){
     
     return(
         <div className={styles.main}
-        style={{display: `${props.modal ? 'flex' : 'none'}`}}
+        style={{display: `${props.modal && Number(process.env.NEXT_PUBLIC_LIMIT) ? 'flex' : 'none'}`}}
         >
             <div className={styles.background}/>
             <div className={styles.modalContainer}>

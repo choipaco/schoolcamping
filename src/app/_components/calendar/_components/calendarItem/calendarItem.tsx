@@ -6,7 +6,7 @@ import { useAlert } from '@/app/_contexts/AlertContext';
 export default function CalendarItem(props:{day:Dates, setData:Dispatch<SetStateAction<any>>, permit:boolean}){
     const { addAlert } = useAlert();
     const handleOnClick = () => {
-        if(!props.permit){
+        if(!props.permit && Number(process.env.NEXT_PUBLIC_LIMIT)){
             return addAlert("예약 진행 기간이 아닙니다", false);
         }
         if(props.day.status === "예약 불가능"){
